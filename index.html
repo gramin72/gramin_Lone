@@ -7,10 +7,21 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+html { scroll-behavior: smooth; }
 body { background-color: #f5f6fa; display: flex; justify-content: center; min-height: 100vh; }
 .mobile-container { width: 100%; max-width: 414px; background-color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.1); position: relative; padding-bottom: 70px; }
-.page { display: none; }
-.page.active { display: block; }
+
+/* SMOOTH PAGE TRANSITION */
+.page { display: none; position: relative; }
+.page.active {
+    display: block;
+    animation: pageIn 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes pageIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
 .top-header { background-color: #d32f2f; color: #ffffff; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
 .sub-header { background-color: #d32f2f; color: #ffffff; padding: 12px; display: flex; align-items: center; gap: 10px; }
 .sub-header i { cursor: pointer; font-size: 16px; color: #fff; }
@@ -57,7 +68,8 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
 .upload-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
 .upload-box span { font-size: 11px; color: #777; text-align: center; }
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 100; }
-.modal-overlay.active { display: flex; }
+.modal-overlay.active { display: flex; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 .alert-box { background: #2d3238; color: #fff; width: 85%; max-width: 320px; border-radius: 12px; padding: 20px; text-align: left; }
 .alert-box h4 { font-size: 15px; margin-bottom: 10px; font-weight: normal; }
 .alert-box p { font-size: 13px; color: #ccc; line-height: 1.4; margin-bottom: 20px; }
@@ -66,28 +78,86 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
 .deposit-header { color: #d32f2f; font-weight: bold; font-size: 15px; display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
 .deposit-body { font-size: 12px; color: #444; line-height: 1.5; }
 .deposit-body h4 { color: #d32f2f; margin: 12px 0 6px; font-size: 13px; }
-.checkout-container { padding: 30px 20px; text-align: center; background-color: #f7f9fd; min-height: 100vh; }
-.checkout-logo-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 8px; }
-.brand-circle-logo { width: 90px; height: 90px; border-radius: 50%; border: 1px solid #7da7d9; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
-.house-icon { color: #e53935; font-size: 26px; }
-.leaf-icon { color: #43a047; font-size: 14px; margin-top: -6px; }
-.logo-text { font-size: 10px; font-weight: bold; color: #2e7d32; margin-top: 2px; }
-.brand-title-text { font-size: 18px; font-weight: bold; color: #455a64; margin-bottom: 15px; }
-.checkout-icons { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
-.checkout-icons .icon-btn { width: 36px; height: 36px; border: 1px solid #d0d7de; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #666; background: #fff; font-size: 14px; }
-.payment-header-bar { background: #004fb6; color: white; padding: 12px; font-size: 13px; font-weight: bold; border-radius: 5px; margin-bottom: 15px; text-align: center; }
-.payment-methods-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; }
-.method-card { background: #fff; border: 1px solid #dcdcdc; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; height: 95px; text-align: center; }
-.method-card.selected { border: 1.5px solid #004fb6; }
-.method-card img { height: 28px; object-fit: contain; margin-bottom: 4px; }
-.method-card .method-title { font-size: 11px; font-weight: bold; color: #333; }
-.method-card .method-sub { font-size: 9px; color: #777; }
-.pay-btn-bottom { width: 100%; background-color: #d8e5fc; color: #004fb6; border: none; padding: 14px; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; }
+
+/* ============ COMPACT CHECKOUT PAGE ============ */
+.checkout-container { padding: 12px 16px 15px; text-align: center; background-color: #f7f9fd; min-height: 100vh; }
+.checkout-logo-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 4px; }
+.brand-circle-logo { width: 60px; height: 60px; border-radius: 50%; border: 1px solid #7da7d9; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+.house-icon { color: #e53935; font-size: 18px; }
+.leaf-icon { color: #43a047; font-size: 10px; margin-top: -4px; }
+.logo-text { font-size: 8px; font-weight: bold; color: #2e7d32; margin-top: 1px; }
+.brand-title-text { font-size: 15px; font-weight: bold; color: #455a64; margin-bottom: 8px; margin-top: 6px; }
+.checkout-icons { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; }
+.checkout-icons .icon-btn { width: 28px; height: 28px; border: 1px solid #d0d7de; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #666; background: #fff; font-size: 11px; }
+.payment-header-bar { background: #004fb6; color: white; padding: 8px; font-size: 12px; font-weight: bold; border-radius: 5px; margin-bottom: 10px; text-align: center; }
+
+/* COMPACT PAYMENT CARDS */
+.payment-methods-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.method-card {
+    background: #fff;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    min-height: 100px;
+}
+.method-card:hover { border-color: #b0b0b0; }
+.method-card.selected {
+    border: 2px solid #004fb6;
+    box-shadow: 0 3px 10px rgba(0, 79, 182, 0.15);
+}
+.method-card .logo-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: #ffffff;
+    min-height: 70px;
+    overflow: hidden;
+    position: relative;
+}
+.method-card .logo-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    background: #ffffff;
+    filter: brightness(1.05) saturate(0.85) contrast(1.05);
+}
+.method-card .text-area {
+    background: #f5f5f5;
+    padding: 5px 6px;
+    text-align: center;
+    border-top: 1px solid #e8e8e8;
+}
+.method-card .method-title {
+    font-size: 10px;
+    color: #333;
+    font-weight: 500;
+    line-height: 1.3;
+    display: block;
+}
+.pay-btn-bottom { width: 100%; background-color: #d8e5fc; color: #004fb6; border: none; padding: 11px; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; }
+
 .gateway-container { padding: 15px; background: #f7f9fc; min-height: 100vh; }
 .gateway-card { background: #fff; border-radius: 12px; padding: 20px; }
 .gateway-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
-.gateway-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: bold; color: #333; }
-.gateway-brand img { height: 26px; object-fit: contain; }
+.gateway-brand { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: bold; color: #333; }
+
+.gateway-brand img { 
+    height: 60px; 
+    width: 60px;
+    object-fit: contain; 
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 4px;
+    filter: brightness(1.08) saturate(0.75) contrast(1.05);
+}
+
 .gateway-amount { font-size: 16px; font-weight: bold; color: #222; border: 1px solid #eee; padding: 6px 12px; border-radius: 6px; background: #fafafa; }
 .instruction-list { text-align: left; font-size: 11px; color: #444; line-height: 2; margin-bottom: 15px; background: #fafafa; padding: 10px; border-radius: 8px; }
 .copy-chip { background: #0d6efd; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 10px; cursor: pointer; margin-left: 5px; display: inline-flex; align-items: center; gap: 3px; }
@@ -98,8 +168,9 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
 .input-group { text-align: left; margin-bottom: 16px; }
 .input-group label { display: block; font-size: 13px; color: #555; margin-bottom: 8px; font-weight: 500; }
 .input-wrapper { position: relative; display: flex; align-items: center; }
-.input-wrapper i { position: absolute; left: 14px; color: #888; font-size: 16px; pointer-events: none; }
-.input-wrapper input, .input-wrapper select { width: 100%; padding: 12px 14px 12px 42px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; outline: none; color: #333; background-color: #fff; }
+.input-wrapper i { position: absolute; left: 14px; color: #888; font-size: 16px; pointer-events: none; z-index: 2; }
+.input-wrapper input, .input-wrapper select { width: 100%; padding: 12px 14px 12px 42px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; outline: none; color: #333; background-color: #fff; appearance: none; -webkit-appearance: none; }
+.input-wrapper select { background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 16px; padding-right: 40px; }
 .submit-btn { width: 100%; background-color: #d32f2f; color: #fff; border: none; padding: 14px; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; }
 .footer-text { margin-top: 22px; font-size: 14px; color: #444; }
 .footer-text a { color: #d32f2f; text-decoration: none; font-weight: bold; display: block; margin-top: 4px; cursor: pointer; }
@@ -137,11 +208,9 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
 .section-label { font-size:11px; font-weight:bold; color:#555; margin-top:10px; margin-bottom:4px; }
 </style>
 
-<!-- FIREBASE SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
 </head>
 <body>
 
@@ -302,6 +371,10 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
 
     <!-- PAYMENT SELECTOR PAGE -->
     <div id="paymentSelectPage" class="page">
+        <div class="sub-header">
+            <i class="fa-solid fa-arrow-left" onclick="showPage('nidPage')"></i>
+            <h2>PAYMENT METHOD</h2>
+        </div>
         <div class="checkout-container">
             <div class="checkout-logo-wrap">
                 <div class="brand-circle-logo">
@@ -317,23 +390,36 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
                 <div class="icon-btn"><i class="fa-solid fa-info"></i></div>
             </div>
             <div class="payment-header-bar">পেমেন্ট পদ্ধতি নির্বাচন করুন</div>
+
             <div class="payment-methods-grid">
                 <div class="method-card" id="method-bkash" onclick="selectPaymentMethod('bKash')">
-                    <img src="https://community.bikroy.com/wp-content/uploads/2020/08/bKash-logo-1024x538.png" alt="bKash">
-                    <span class="method-title">bKash</span>
-                    <span class="method-sub">বিকাশ পার্সোনাল</span>
+                    <div class="logo-area">
+                        <img src="https://i.ibb.co.com/RJyZsNM/bkash-png-3.jpg" alt="bKash">
+                    </div>
+                    <div class="text-area">
+                        <span class="method-title">বিকাশ পার্সোনাল ( সেন্ড মানি)</span>
+                    </div>
                 </div>
+
                 <div class="method-card selected" id="method-nagad" onclick="selectPaymentMethod('Nagad')">
-                    <img src="https://download.logo.wine/logo/Nagad/Nagad-Logo.wine.png" alt="Nagad">
-                    <span class="method-title">নগদ</span>
-                    <span class="method-sub">নগদ পার্সোনাল</span>
+                    <div class="logo-area">
+                        <img src="https://i.ibb.co.com/MTg78j8/nagad-png-3.jpg" alt="Nagad">
+                    </div>
+                    <div class="text-area">
+                        <span class="method-title">নগদ পার্সোনাল ( সেন্ড মানি)</span>
+                    </div>
                 </div>
+
                 <div class="method-card" id="method-rocket" onclick="selectPaymentMethod('Rocket')">
-                    <img src="https://seeklogo.com/images/D/dutch-bangla-rocket-logo-B4D1CC458D-seeklogo.com.png" alt="Rocket">
-                    <span class="method-title">রকেট</span>
-                    <span class="method-sub">রকেট পার্সোনাল</span>
+                    <div class="logo-area">
+                        <img src="https://i.ibb.co.com/YFt9mMrm/rokat-png.png" alt="Rocket">
+                    </div>
+                    <div class="text-area">
+                        <span class="method-title">রকেট পার্সোনাল ( সেন্ড মানি)</span>
+                    </div>
                 </div>
             </div>
+
             <button id="paySubmitBtn" class="pay-btn-bottom" onclick="proceedToGateway()">
                 Pay 519.00 BDT
             </button>
@@ -342,6 +428,10 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
 
     <!-- PAYMENT GATEWAY PAGE -->
     <div id="paymentGatewayPage" class="page">
+        <div class="sub-header">
+            <i class="fa-solid fa-arrow-left" onclick="showPage('paymentSelectPage')"></i>
+            <h2>PAYMENT</h2>
+        </div>
         <div class="gateway-container">
             <div class="gateway-card">
                 <div class="gateway-header">
@@ -437,6 +527,7 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
             <div style="font-size:50px; color:#d32f2f; margin-bottom:10px;"><i class="fa-solid fa-circle-user"></i></div>
             <h3 id="profName">-</h3>
             <p id="profPhone" style="color:#666; font-size:12px; margin-bottom:5px;">-</p>
+            <p id="profProfession" style="color:#1976d2; font-size:12px; margin-bottom:5px;">-</p>
             <p id="profBalance" style="color:#2e7d32; font-size:14px; font-weight:bold; margin-bottom:15px;">৳ 0.00</p>
             <button class="action-btn" onclick="logout()">লগআউট করুন</button>
         </div>
@@ -460,6 +551,10 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
 
     <!-- LOGIN PAGE -->
     <div id="loginPage" class="page">
+        <div class="sub-header">
+            <i class="fa-solid fa-arrow-left" onclick="showPage('homePage')"></i>
+            <h2>LOGIN</h2>
+        </div>
         <div class="auth-container">
             <div class="logo-circle"><i class="fa-solid fa-house" style="color:#d32f2f; font-size:32px;"></i></div>
             <div class="auth-card">
@@ -489,6 +584,10 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
 
     <!-- REGISTER PAGE -->
     <div id="registerPage" class="page">
+        <div class="sub-header">
+            <i class="fa-solid fa-arrow-left" onclick="showPage('loginPage')"></i>
+            <h2>REGISTER</h2>
+        </div>
         <div class="auth-container">
             <div class="logo-circle"><i class="fa-solid fa-house" style="color:#d32f2f; font-size:32px;"></i></div>
             <div class="auth-card">
@@ -497,7 +596,7 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
                     <div class="input-group">
                         <label>পুরো নাম</label>
                         <div class="input-wrapper"><i class="fa-regular fa-user"></i>
-                            <input type="text" id="regName" placeholder="আপনার নাম" required>
+                            <input type="text" id="regName" placeholder="আপনার নাম লিখুন" required>
                         </div>
                     </div>
                     <div class="input-group">
@@ -507,9 +606,24 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
                         </div>
                     </div>
                     <div class="input-group">
+                        <label>পেশা</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-briefcase"></i>
+                            <select id="regProfession" required>
+                                <option value="" disabled selected>পেশা নির্বাচন করুন</option>
+                                <option value="শিক্ষার্থী">শিক্ষার্থী</option>
+                                <option value="শিক্ষক">শিক্ষক</option>
+                                <option value="কৃষক">কৃষক</option>
+                                <option value="ব্যবসায়ী">ব্যবসায়ী</option>
+                                <option value="চাকরিজীবী">চাকরিজীবী</option>
+                                <option value="অন্যান্য">অন্যান্য</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
                         <label>পাসওয়ার্ড (৬+ অক্ষর)</label>
                         <div class="input-wrapper"><i class="fa-solid fa-lock"></i>
-                            <input type="password" id="regPassword" placeholder="পাসওয়ার্ড" minlength="6" required>
+                            <input type="password" id="regPassword" placeholder="পাসওয়ার্ড লিখুন" minlength="6" required>
                         </div>
                     </div>
                     <button type="submit" class="submit-btn"><i class="fa-solid fa-user-plus"></i> নিবন্ধন করুন</button>
@@ -560,13 +674,16 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
-const storage = firebase.storage();
 
 function phoneToEmail(phone) {
     return phone.replace(/\D/g, '') + '@gramin.app';
 }
 
-// ============ STATE ============
+function safeStr(val, fallback) {
+    if (val === undefined || val === null || val === '') return fallback || '';
+    return String(val);
+}
+
 let currentApplication = {
     name: '', amount: 5000, feeAmount: 519, duration: 3,
     reason: 'কৃষি', hasFrontImg: false, hasBackImg: false,
@@ -581,10 +698,11 @@ const merchantNumbers = {
     'Nagad': '01989070568',
     'Rocket': '01806518621'
 };
+
 const gatewayLogos = {
-    'bKash': 'https://community.bikroy.com/wp-content/uploads/2020/08/bKash-logo-1024x538.png',
-    'Nagad': 'https://download.logo.wine/logo/Nagad/Nagad-Logo.wine.png',
-    'Rocket': 'https://seeklogo.com/images/D/dutch-bangla-rocket-logo-B4D1CC458D-seeklogo.com.png'
+    'bKash': 'https://i.ibb.co.com/RJyZsNM/bkash-png-3.jpg',
+    'Nagad': 'https://i.ibb.co.com/MTg78j8/nagad-png-3.jpg',
+    'Rocket': 'https://i.ibb.co.com/YFt9mMrm/rokat-png.png'
 };
 
 // ============ AUTH LISTENER ============
@@ -597,7 +715,7 @@ auth.onAuthStateChanged(async (user) => {
             } else {
                 currentUserProfile = {
                     uid: user.uid, name: user.displayName || 'User',
-                    phone: (user.email || '').split('@')[0], balance: 0, role: 'user'
+                    phone: (user.email || '').split('@')[0], profession: '', balance: 0, role: 'user'
                 };
             }
         } catch (e) { console.error(e); }
@@ -619,6 +737,7 @@ function showPage(pageId) {
     else if (pageId === 'profilePage' && currentUserProfile) {
         document.getElementById('profName').innerText = currentUserProfile.name;
         document.getElementById('profPhone').innerText = currentUserProfile.phone;
+        document.getElementById('profProfession').innerText = 'পেশা: ' + safeStr(currentUserProfile.profession, 'উল্লেখ নেই');
         document.getElementById('profBalance').innerText = '৳ ' + (currentUserProfile.balance || 0) + '.00';
     } else if (pageId === 'cashoutPage' && currentUserProfile) {
         document.getElementById('cashoutBalance').innerText = '৳ ' + (currentUserProfile.balance || 0) + '.00';
@@ -668,11 +787,12 @@ function renderHeader() {
     }
 }
 
-// ============ REGISTER (Fixed) ============
+// ============ REGISTER ============
 document.getElementById('registerForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const name = document.getElementById('regName').value.trim();
     const phone = document.getElementById('regPhone').value.trim();
+    const profession = document.getElementById('regProfession').value;
     const password = document.getElementById('regPassword').value;
     const btn = this.querySelector('button[type="submit"]');
     const oldText = btn.innerHTML;
@@ -683,11 +803,11 @@ document.getElementById('registerForm').addEventListener('submit', async functio
         const cred = await auth.createUserWithEmailAndPassword(email, password);
         await cred.user.updateProfile({ displayName: name });
 
-        // Firestore-এ সেভ
         const userData = {
             uid: cred.user.uid,
             name: name,
             phone: phone,
+            profession: profession,
             email: email,
             balance: 0,
             role: 'user',
@@ -695,10 +815,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
         };
         await db.collection('users').doc(cred.user.uid).set(userData);
 
-        // সাথে সাথে currentUserProfile সেট করুন
         currentUserProfile = userData;
-
-        // হেডার রেন্ডার করে হোম পেজ দেখান
         renderHeader();
         alert('নিবন্ধন সফল হয়েছে!');
         this.reset();
@@ -713,7 +830,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
     } finally { btn.innerHTML = oldText; btn.disabled = false; }
 });
 
-// ============ LOGIN (Fixed) ============
+// ============ LOGIN ============
 document.getElementById('loginForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const phone = document.getElementById('loginPhone').value.trim();
@@ -723,35 +840,24 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     btn.innerHTML = 'অপেক্ষা করুন...'; btn.disabled = true;
 
     try {
-        // ১. লগইন করুন
         const cred = await auth.signInWithEmailAndPassword(phoneToEmail(phone), password);
 
-        // ২. সাথে সাথে Firestore থেকে প্রোফাইল লোড করুন
         let profileData = null;
         try {
             const snap = await db.collection('users').doc(cred.user.uid).get();
-            if (snap.exists) {
-                profileData = snap.data();
-            }
-        } catch (dbErr) {
-            console.error('Firestore read error:', dbErr);
-        }
+            if (snap.exists) profileData = snap.data();
+        } catch (dbErr) { console.error('Firestore read error:', dbErr); }
 
-        // Firestore এ ডেটা না থাকলে ডিফল্ট
         if (!profileData) {
             profileData = {
                 uid: cred.user.uid,
                 name: cred.user.displayName || 'User',
-                phone: phone,
-                email: cred.user.email,
-                balance: 0,
-                role: 'user'
+                phone: phone, profession: '',
+                email: cred.user.email, balance: 0, role: 'user'
             };
         }
 
         currentUserProfile = profileData;
-
-        // ৩. হেডার আপডেট করে হোম পেজ দেখান
         renderHeader();
         this.reset();
         showPage('homePage');
@@ -772,7 +878,7 @@ async function logout() {
     showPage('homePage');
 }
 
-// ============ NID IMAGE PREVIEW ============
+// ============ NID PREVIEW ============
 function previewImage(input, targetImgId) {
     if (input.files && input.files[0]) {
         const file = input.files[0];
@@ -781,17 +887,36 @@ function previewImage(input, targetImgId) {
             const img = document.getElementById(targetImgId);
             img.src = e.target.result;
             img.style.display = 'block';
-            if (targetImgId === 'frontImg') {
-                currentApplication.hasFrontImg = true;
-                currentApplication.frontFile = file;
-            }
-            if (targetImgId === 'backImg') {
-                currentApplication.hasBackImg = true;
-                currentApplication.backFile = file;
-            }
+            if (targetImgId === 'frontImg') { currentApplication.hasFrontImg = true; currentApplication.frontFile = file; }
+            if (targetImgId === 'backImg') { currentApplication.hasBackImg = true; currentApplication.backFile = file; }
         };
         reader.readAsDataURL(file);
     }
+}
+
+// ============ COMPRESS TO BASE64 ============
+function compressToBase64(file, maxWidth, quality) {
+    maxWidth = maxWidth || 600;
+    quality = quality || 0.6;
+    return new Promise(function(resolve, reject) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                let w = img.width, h = img.height;
+                if (w > maxWidth) { h = (h * maxWidth) / w; w = maxWidth; }
+                canvas.width = w; canvas.height = h;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, w, h);
+                resolve(canvas.toDataURL('image/jpeg', quality));
+            };
+            img.onerror = reject;
+            img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
 }
 
 // ============ LOAN SUBMIT ============
@@ -819,14 +944,14 @@ async function handleLoanSubmit(e) {
     for (let i = 1; i <= currentApplication.duration; i++) {
         cd.setMonth(cd.getMonth() + 1);
         const d = cd.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
-        sc.innerHTML += `<div class="schedule-item"><div class="schedule-date">• ${d}</div><div>৳${perMonth}</div></div>`;
+        sc.innerHTML += '<div class="schedule-item"><div class="schedule-date">• ' + d + '</div><div>৳' + perMonth + '</div></div>';
     }
 
-    document.getElementById('nidNotice').innerText = `আপনি ${currentApplication.amount} টাকার লোনের জন্য আবেদন করেছেন ${currentApplication.duration} মাস মেয়াদে। NID আপলোড করুন।`;
+    document.getElementById('nidNotice').innerText = 'আপনি ' + currentApplication.amount + ' টাকার লোনের জন্য আবেদন করেছেন ' + currentApplication.duration + ' মাস মেয়াদে। NID আপলোড করুন।';
     showPage('summaryPage');
 }
 
-// ============ SUBMIT DOCUMENTS (NID UPLOAD) ============
+// ============ SUBMIT DOCUMENTS ============
 async function submitDocuments() {
     if (!currentApplication.hasFrontImg || !currentApplication.hasBackImg) {
         document.getElementById('alertModal').classList.add('active');
@@ -835,41 +960,45 @@ async function submitDocuments() {
     if (!auth.currentUser) { alert('লগইন করুন!'); return; }
 
     const btn = document.getElementById('uploadBtn');
-    btn.innerText = 'আপলোড হচ্ছে...'; btn.disabled = true;
+    btn.innerText = 'ছবি ছোট করা হচ্ছে...'; btn.disabled = true;
 
     try {
         const uid = auth.currentUser.uid;
-        const ts = Date.now();
+        const frontBase64 = await compressToBase64(currentApplication.frontFile, 600, 0.6);
+        const backBase64 = await compressToBase64(currentApplication.backFile, 600, 0.6);
 
-        const frontRef = storage.ref().child(`nid/${uid}/front_${ts}_${currentApplication.frontFile.name}`);
-        await frontRef.put(currentApplication.frontFile);
-        const frontUrl = await frontRef.getDownloadURL();
-
-        const backRef = storage.ref().child(`nid/${uid}/back_${ts}_${currentApplication.backFile.name}`);
-        await backRef.put(currentApplication.backFile);
-        const backUrl = await backRef.getDownloadURL();
+        btn.innerText = 'সেভ হচ্ছে...';
 
         const interest = currentApplication.amount * 0.03;
         const totalPayable = currentApplication.amount + interest;
+        const userPhone = (currentUserProfile && currentUserProfile.phone) ? String(currentUserProfile.phone) : '';
+        const userProfession = (currentUserProfile && currentUserProfile.profession) ? String(currentUserProfile.profession) : 'উল্লেখ নেই';
+
         const docRef = await db.collection('loanApplications').add({
-            uid, name: currentApplication.name,
-            phone: currentUserProfile ? currentUserProfile.phone : '',
+            uid: uid,
+            name: currentApplication.name,
+            phone: userPhone,
+            profession: userProfession,
             amount: currentApplication.amount,
             duration: currentApplication.duration,
             reason: currentApplication.reason,
             feeAmount: currentApplication.feeAmount,
-            interest, totalPayable,
-            nidFront: frontUrl, nidBack: backUrl,
+            interest: interest,
+            totalPayable: totalPayable,
+            nidFront: frontBase64,
+            nidBack: backBase64,
+            nidType: 'base64',
             status: 'pending',
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
         currentApplication.loanDocId = docRef.id;
 
-        document.getElementById('depositText').innerText = `আপনি ${currentApplication.amount} টাকা লোন নিতে চাইলে আপনাকে ${currentApplication.feeAmount} টাকা জামানত জমা দিতে হবে।`;
+        document.getElementById('depositText').innerText = 'আপনি ' + currentApplication.amount + ' টাকা লোন নিতে চাইলে আপনাকে ' + currentApplication.feeAmount + ' টাকা জামানত জমা দিতে হবে।';
         document.getElementById('depositModal').classList.add('active');
+
     } catch (err) {
         console.error(err);
-        alert('আপলোড ব্যর্থ: ' + err.message);
+        alert('সেভ ব্যর্থ: ' + err.message);
     } finally {
         btn.innerText = 'ডকুমেন্ট জমা দিন'; btn.disabled = false;
     }
@@ -877,7 +1006,7 @@ async function submitDocuments() {
 
 function goToPaymentSelector() {
     closeModal('depositModal');
-    document.getElementById('paySubmitBtn').innerText = `Pay ${currentApplication.feeAmount}.00 BDT`;
+    document.getElementById('paySubmitBtn').innerText = 'Pay ' + currentApplication.feeAmount + '.00 BDT';
     selectPaymentMethod('Nagad');
     showPage('paymentSelectPage');
 }
@@ -894,7 +1023,7 @@ function proceedToGateway() {
     document.getElementById('gatewayName').innerText = m === 'bKash' ? 'bKash' : m === 'Nagad' ? 'নগদ' : 'রকেট';
     document.getElementById('instructionMethodName').innerText = m;
     document.getElementById('instructionMethodName2').innerText = m;
-    document.getElementById('gatewayAmountText').innerText = `${currentApplication.feeAmount} BDT`;
+    document.getElementById('gatewayAmountText').innerText = currentApplication.feeAmount + ' BDT';
     document.getElementById('gatewayAmountInstruction').innerText = currentApplication.feeAmount;
     document.getElementById('gatewayNumber').innerText = merchantNumbers[m];
     document.getElementById('gatewayLogoImg').src = gatewayLogos[m];
@@ -920,10 +1049,11 @@ async function handlePaymentVerify(e) {
     if (!auth.currentUser) return;
 
     try {
+        const userPhone = (currentUserProfile && currentUserProfile.phone) ? String(currentUserProfile.phone) : '';
         await db.collection('payments').add({
             uid: auth.currentUser.uid,
             name: currentApplication.name,
-            phone: currentUserProfile ? currentUserProfile.phone : '',
+            phone: userPhone,
             method: currentApplication.selectedMethod,
             amount: currentApplication.feeAmount,
             trxId: trxId,
@@ -951,14 +1081,13 @@ async function loadMyLoans() {
         snap.forEach(doc => {
             const d = doc.data();
             const badge = d.status === 'approved' ? 'badge-approved' : d.status === 'rejected' ? 'badge-rejected' : 'badge-pending';
-            html += `
-                <div class="admin-card">
-                    <div class="title">৳ ${d.amount}</div>
-                    <div class="info-row"><span>মেয়াদ:</span><b>${d.duration} মাস</b></div>
-                    <div class="info-row"><span>কারণ:</span><b>${d.reason}</b></div>
-                    <div class="info-row"><span>মোট পরিশোধ:</span><b>৳ ${d.totalPayable}</b></div>
-                    <div class="info-row"><span>স্ট্যাটাস:</span><span class="badge ${badge}">${d.status}</span></div>
-                </div>`;
+            html += '<div class="admin-card">' +
+                '<div class="title">৳ ' + d.amount + '</div>' +
+                '<div class="info-row"><span>মেয়াদ:</span><b>' + d.duration + ' মাস</b></div>' +
+                '<div class="info-row"><span>কারণ:</span><b>' + d.reason + '</b></div>' +
+                '<div class="info-row"><span>মোট পরিশোধ:</span><b>৳ ' + d.totalPayable + '</b></div>' +
+                '<div class="info-row"><span>স্ট্যাটাস:</span><span class="badge ' + badge + '">' + d.status + '</span></div>' +
+                '</div>';
         });
         el.innerHTML = html;
     } catch (err) { el.innerHTML = '<p style="color:red;">' + err.message + '</p>'; }
@@ -979,30 +1108,28 @@ async function loadAllUsers() {
     el.innerHTML = '<p style="text-align:center; color:#777;">লোড হচ্ছে...</p>';
 
     try {
-        const [usersSnap, loansSnap, paymentsSnap] = await Promise.all([
+        const results = await Promise.all([
             db.collection('users').orderBy('createdAt', 'desc').get(),
             db.collection('loanApplications').get(),
             db.collection('payments').get()
         ]);
+        const usersSnap = results[0], loansSnap = results[1], paymentsSnap = results[2];
 
         const loansByUid = {};
         loansSnap.forEach(doc => {
             const d = doc.data();
             if (!loansByUid[d.uid]) loansByUid[d.uid] = [];
-            loansByUid[d.uid].push({ id: doc.id, ...d });
+            loansByUid[d.uid].push(Object.assign({ id: doc.id }, d));
         });
 
         const paymentsByUid = {};
         paymentsSnap.forEach(doc => {
             const p = doc.data();
             if (!paymentsByUid[p.uid]) paymentsByUid[p.uid] = [];
-            paymentsByUid[p.uid].push({ id: doc.id, ...p });
+            paymentsByUid[p.uid].push(Object.assign({ id: doc.id }, p));
         });
 
-        if (usersSnap.empty) {
-            el.innerHTML = '<p style="text-align:center; color:#777;">কোনো ইউজার নেই।</p>';
-            return;
-        }
+        if (usersSnap.empty) { el.innerHTML = '<p style="text-align:center; color:#777;">কোনো ইউজার নেই।</p>'; return; }
 
         let html = '';
 
@@ -1012,12 +1139,8 @@ async function loadAllUsers() {
             const userLoans = loansByUid[uid] || [];
             const userPayments = paymentsByUid[uid] || [];
 
-            const totalPaid = userPayments
-                .filter(p => p.status === 'approved')
-                .reduce((sum, p) => sum + (p.amount || 0), 0);
-            const totalPendingPayment = userPayments
-                .filter(p => p.status !== 'approved' && p.status !== 'rejected')
-                .reduce((sum, p) => sum + (p.amount || 0), 0);
+            const totalPaid = userPayments.filter(p => p.status === 'approved').reduce((sum, p) => sum + (p.amount || 0), 0);
+            const totalPendingPayment = userPayments.filter(p => p.status !== 'approved' && p.status !== 'rejected').reduce((sum, p) => sum + (p.amount || 0), 0);
 
             let nidFront = null, nidBack = null;
             for (let i = userLoans.length - 1; i >= 0; i--) {
@@ -1031,15 +1154,11 @@ async function loadAllUsers() {
                 userPayments.forEach(p => {
                     const bg = p.status === 'approved' ? '#d4edda' : p.status === 'rejected' ? '#f8d7da' : '#fff3cd';
                     const tc = p.status === 'approved' ? '#155724' : p.status === 'rejected' ? '#721c24' : '#856404';
-                    paymentsHtml += `
-                        <div class="payment-item">
-                            <div style="display:flex; justify-content:space-between;">
-                                <span><b>৳ ${p.amount}</b> — ${p.method}</span>
-                                <span style="background:${bg}; color:${tc}; padding:1px 6px; border-radius:8px; font-size:9px; font-weight:bold;">${p.status}</span>
-                            </div>
-                            <div style="margin-top:2px;">TrxID: <b>${p.trxId}</b></div>
-                            <div style="color:#888; font-size:9px;">নম্বর: ${p.merchantNumber || '-'}</div>
-                        </div>`;
+                    paymentsHtml += '<div class="payment-item"><div style="display:flex; justify-content:space-between;">' +
+                        '<span><b>৳ ' + p.amount + '</b> — ' + p.method + '</span>' +
+                        '<span style="background:' + bg + '; color:' + tc + '; padding:1px 6px; border-radius:8px; font-size:9px; font-weight:bold;">' + p.status + '</span></div>' +
+                        '<div style="margin-top:2px;">TrxID: <b>' + p.trxId + '</b></div>' +
+                        '<div style="color:#888; font-size:9px;">নম্বর: ' + (p.merchantNumber || '-') + '</div></div>';
                 });
             }
 
@@ -1050,69 +1169,35 @@ async function loadAllUsers() {
                 userLoans.forEach(l => {
                     const bg = l.status === 'approved' ? '#d4edda' : l.status === 'rejected' ? '#f8d7da' : '#fff3cd';
                     const tc = l.status === 'approved' ? '#155724' : l.status === 'rejected' ? '#721c24' : '#856404';
-                    loansHtml += `
-                        <div class="payment-item" style="background:#e3f2fd; border-color:#1976d2;">
-                            <div style="display:flex; justify-content:space-between;">
-                                <span><b>৳ ${l.amount}</b> — ${l.reason}</span>
-                                <span style="background:${bg}; color:${tc}; padding:1px 6px; border-radius:8px; font-size:9px; font-weight:bold;">${l.status}</span>
-                            </div>
-                            <div style="margin-top:2px;">মেয়াদ: ${l.duration} মাস | মোট পরিশোধ: ৳ ${l.totalPayable}</div>
-                        </div>`;
+                    loansHtml += '<div class="payment-item" style="background:#e3f2fd; border-color:#1976d2;"><div style="display:flex; justify-content:space-between;">' +
+                        '<span><b>৳ ' + l.amount + '</b> — ' + l.reason + '</span>' +
+                        '<span style="background:' + bg + '; color:' + tc + '; padding:1px 6px; border-radius:8px; font-size:9px; font-weight:bold;">' + l.status + '</span></div>' +
+                        '<div style="margin-top:2px;">মেয়াদ: ' + l.duration + ' মাস | মোট পরিশোধ: ৳ ' + l.totalPayable + '</div></div>';
                 });
             }
 
-            html += `
-                <div class="admin-card">
-                    <div class="title">
-                        <i class="fa-solid fa-user"></i> ${u.name || '-'}
-                        ${u.role === 'admin' ? '<span class="badge badge-approved" style="margin-left:5px;">ADMIN</span>' : ''}
-                    </div>
-
-                    <div class="info-row"><span>📱 ফোন:</span><b>${u.phone || '-'}</b></div>
-                    <div class="info-row"><span>📧 ইমেইল:</span><b style="font-size:10px;">${u.email || '-'}</b></div>
-                    <div class="info-row"><span>💰 বর্তমান ব্যালেন্স:</span><b style="color:#2e7d32;">৳ ${u.balance || 0}</b></div>
-
-                    <div class="section-label">🪪 NID কার্ড:</div>
-                    ${nidFront ? `
-                        <div class="nid-mini-grid">
-                            <div class="nid-mini" onclick="window.open('${nidFront}','_blank')">
-                                <img src="${nidFront}">
-                                <span>Front (দেখুন)</span>
-                            </div>
-                            <div class="nid-mini" onclick="window.open('${nidBack}','_blank')">
-                                <img src="${nidBack}">
-                                <span>Back (দেখুন)</span>
-                            </div>
-                        </div>
-                    ` : '<div style="font-size:10px; color:#999; padding:4px;">NID আপলোড করা হয়নি</div>'}
-
-                    <div class="stat-box">
-                        <div class="stat-row">
-                            <span>মোট পরিশোধ (Approved):</span>
-                            <span class="green">৳ ${totalPaid}</span>
-                        </div>
-                        ${totalPendingPayment > 0 ? `
-                        <div class="stat-row">
-                            <span>Pending পেমেন্ট:</span>
-                            <span style="color:#f57c00; font-weight:bold;">৳ ${totalPendingPayment}</span>
-                        </div>` : ''}
-                        <div class="stat-row">
-                            <span>মোট পেমেন্ট সংখ্যা:</span>
-                            <span class="blue">${userPayments.length} টি</span>
-                        </div>
-                    </div>
-
-                    <div class="section-label">💳 পেমেন্ট ও TrxID:</div>
-                    ${paymentsHtml}
-
-                    <div class="section-label">📄 লোন আবেদন:</div>
-                    ${loansHtml}
-
-                    <div style="display:flex; gap:5px; align-items:center; margin-top:10px; border-top:1px dashed #ddd; padding-top:8px;">
-                        <input type="number" id="bal_${uid}" placeholder="টাকা লিখুন" style="flex:1; padding:6px; border:1px solid #ddd; border-radius:5px; font-size:11px;">
-                        <button class="admin-btn btn-blue" onclick="addBalance('${uid}')">➕ ব্যালেন্স যোগ</button>
-                    </div>
-                </div>`;
+            html += '<div class="admin-card">' +
+                '<div class="title"><i class="fa-solid fa-user"></i> ' + (u.name || '-') +
+                (u.role === 'admin' ? '<span class="badge badge-approved" style="margin-left:5px;">ADMIN</span>' : '') + '</div>' +
+                '<div class="info-row"><span>📱 ফোন:</span><b>' + (u.phone || '-') + '</b></div>' +
+                '<div class="info-row"><span>💼 পেশা:</span><b>' + safeStr(u.profession, 'উল্লেখ নেই') + '</b></div>' +
+                '<div class="info-row"><span>📧 ইমেইল:</span><b style="font-size:10px;">' + (u.email || '-') + '</b></div>' +
+                '<div class="info-row"><span>💰 বর্তমান ব্যালেন্স:</span><b style="color:#2e7d32;">৳ ' + (u.balance || 0) + '</b></div>' +
+                '<div class="section-label">🪪 NID কার্ড:</div>' +
+                (nidFront ?
+                    '<div class="nid-mini-grid">' +
+                    '<div class="nid-mini" onclick="window.open(\'' + nidFront + '\',\'_blank\')"><img src="' + nidFront + '"><span>Front (দেখুন)</span></div>' +
+                    '<div class="nid-mini" onclick="window.open(\'' + nidBack + '\',\'_blank\')"><img src="' + nidBack + '"><span>Back (দেখুন)</span></div></div>'
+                    : '<div style="font-size:10px; color:#999; padding:4px;">NID আপলোড করা হয়নি</div>') +
+                '<div class="stat-box">' +
+                '<div class="stat-row"><span>মোট পরিশোধ (Approved):</span><span class="green">৳ ' + totalPaid + '</span></div>' +
+                (totalPendingPayment > 0 ? '<div class="stat-row"><span>Pending পেমেন্ট:</span><span style="color:#f57c00; font-weight:bold;">৳ ' + totalPendingPayment + '</span></div>' : '') +
+                '<div class="stat-row"><span>মোট পেমেন্ট সংখ্যা:</span><span class="blue">' + userPayments.length + ' টি</span></div></div>' +
+                '<div class="section-label">💳 পেমেন্ট ও TrxID:</div>' + paymentsHtml +
+                '<div class="section-label">📄 লোন আবেদন:</div>' + loansHtml +
+                '<div style="display:flex; gap:5px; align-items:center; margin-top:10px; border-top:1px dashed #ddd; padding-top:8px;">' +
+                '<input type="number" id="bal_' + uid + '" placeholder="টাকা লিখুন" style="flex:1; padding:6px; border:1px solid #ddd; border-radius:5px; font-size:11px;">' +
+                '<button class="admin-btn btn-blue" onclick="addBalance(\'' + uid + '\')">➕ ব্যালেন্স যোগ</button></div></div>';
         });
 
         el.innerHTML = html;
@@ -1132,29 +1217,25 @@ async function loadAllLoans() {
         snap.forEach(doc => {
             const d = doc.data();
             const badge = d.status === 'approved' ? 'badge-approved' : d.status === 'rejected' ? 'badge-rejected' : 'badge-pending';
-            html += `
-                <div class="admin-card">
-                    <div class="title">${d.name} — ৳ ${d.amount}</div>
-                    <div class="info-row"><span>📱 ফোন:</span><b>${d.phone || '-'}</b></div>
-                    <div class="info-row"><span>মেয়াদ:</span><b>${d.duration} মাস</b></div>
-                    <div class="info-row"><span>কারণ:</span><b>${d.reason}</b></div>
-                    <div class="info-row"><span>জামানত:</span><b>৳ ${d.feeAmount}</b></div>
-                    <div class="info-row"><span>মোট পরিশোধ:</span><b>৳ ${d.totalPayable}</b></div>
-                    <div class="info-row"><span>স্ট্যাটাস:</span><span class="badge ${badge}">${d.status}</span></div>
-                    ${d.nidFront ? `<div class="section-label">🪪 NID:</div>
-                    <div class="nid-mini-grid">
-                        <div class="nid-mini" onclick="window.open('${d.nidFront}','_blank')">
-                            <img src="${d.nidFront}"><span>Front</span>
-                        </div>
-                        <div class="nid-mini" onclick="window.open('${d.nidBack}','_blank')">
-                            <img src="${d.nidBack}"><span>Back</span>
-                        </div>
-                    </div>` : ''}
-                    <div style="margin-top:8px;">
-                        ${d.status !== 'approved' ? `<button class="admin-btn btn-green" onclick="approveLoan('${doc.id}','${d.uid}',${d.amount})">✓ Approve + ব্যালেন্স</button>` : ''}
-                        ${d.status !== 'rejected' ? `<button class="admin-btn btn-red" onclick="rejectLoan('${doc.id}')">✗ Reject</button>` : ''}
-                    </div>
-                </div>`;
+            html += '<div class="admin-card">' +
+                '<div class="title">' + d.name + ' — ৳ ' + d.amount + '</div>' +
+                '<div class="info-row"><span>📱 ফোন:</span><b>' + (d.phone || '-') + '</b></div>' +
+                '<div class="info-row"><span>💼 পেশা:</span><b>' + safeStr(d.profession, 'উল্লেখ নেই') + '</b></div>' +
+                '<div class="info-row"><span>মেয়াদ:</span><b>' + d.duration + ' মাস</b></div>' +
+                '<div class="info-row"><span>কারণ:</span><b>' + d.reason + '</b></div>' +
+                '<div class="info-row"><span>জামানত:</span><b>৳ ' + d.feeAmount + '</b></div>' +
+                '<div class="info-row"><span>মোট পরিশোধ:</span><b>৳ ' + d.totalPayable + '</b></div>' +
+                '<div class="info-row"><span>স্ট্যাটাস:</span><span class="badge ' + badge + '">' + d.status + '</span></div>' +
+                (d.nidFront ?
+                    '<div class="section-label">🪪 NID:</div>' +
+                    '<div class="nid-mini-grid">' +
+                    '<div class="nid-mini" onclick="window.open(\'' + d.nidFront + '\',\'_blank\')"><img src="' + d.nidFront + '"><span>Front</span></div>' +
+                    '<div class="nid-mini" onclick="window.open(\'' + d.nidBack + '\',\'_blank\')"><img src="' + d.nidBack + '"><span>Back</span></div></div>'
+                    : '') +
+                '<div style="margin-top:8px;">' +
+                (d.status !== 'approved' ? '<button class="admin-btn btn-green" onclick="approveLoan(\'' + doc.id + '\',\'' + d.uid + '\',' + d.amount + ')">✓ Approve + ব্যালেন্স</button>' : '') +
+                (d.status !== 'rejected' ? '<button class="admin-btn btn-red" onclick="rejectLoan(\'' + doc.id + '\')">✗ Reject</button>' : '') +
+                '</div></div>';
         });
         el.innerHTML = html;
     } catch (err) { el.innerHTML = '<p style="color:red;">' + err.message + '</p>'; }
@@ -1170,18 +1251,16 @@ async function loadAllPayments() {
         snap.forEach(doc => {
             const p = doc.data();
             const badge = p.status === 'approved' ? 'badge-approved' : p.status === 'rejected' ? 'badge-rejected' : 'badge-pending';
-            html += `
-                <div class="admin-card">
-                    <div class="title">${p.name} — ৳ ${p.amount}</div>
-                    <div class="info-row"><span>📱 ফোন:</span><b>${p.phone || '-'}</b></div>
-                    <div class="info-row"><span>মেথড:</span><b>${p.method}</b></div>
-                    <div class="info-row"><span>TrxID:</span><b>${p.trxId}</b></div>
-                    <div class="info-row"><span>স্ট্যাটাস:</span><span class="badge ${badge}">${p.status}</span></div>
-                    <div style="margin-top:8px;">
-                        ${p.status !== 'approved' ? `<button class="admin-btn btn-green" onclick="approvePayment('${doc.id}')">✓ Approve</button>` : ''}
-                        ${p.status !== 'rejected' ? `<button class="admin-btn btn-red" onclick="rejectPayment('${doc.id}')">✗ Reject</button>` : ''}
-                    </div>
-                </div>`;
+            html += '<div class="admin-card">' +
+                '<div class="title">' + p.name + ' — ৳ ' + p.amount + '</div>' +
+                '<div class="info-row"><span>📱 ফোন:</span><b>' + (p.phone || '-') + '</b></div>' +
+                '<div class="info-row"><span>মেথড:</span><b>' + p.method + '</b></div>' +
+                '<div class="info-row"><span>TrxID:</span><b>' + p.trxId + '</b></div>' +
+                '<div class="info-row"><span>স্ট্যাটাস:</span><span class="badge ' + badge + '">' + p.status + '</span></div>' +
+                '<div style="margin-top:8px;">' +
+                (p.status !== 'approved' ? '<button class="admin-btn btn-green" onclick="approvePayment(\'' + doc.id + '\')">✓ Approve</button>' : '') +
+                (p.status !== 'rejected' ? '<button class="admin-btn btn-red" onclick="rejectPayment(\'' + doc.id + '\')">✗ Reject</button>' : '') +
+                '</div></div>';
         });
         el.innerHTML = html;
     } catch (err) { el.innerHTML = '<p style="color:red;">' + err.message + '</p>'; }
@@ -1196,14 +1275,14 @@ async function addBalance(uid) {
         const snap = await userRef.get();
         const cur = snap.data().balance || 0;
         await userRef.update({ balance: cur + amount });
-        alert(`৳ ${amount} যোগ করা হয়েছে! নতুন ব্যালেন্স: ৳ ${cur + amount}`);
+        alert('৳ ' + amount + ' যোগ করা হয়েছে! নতুন ব্যালেন্স: ৳ ' + (cur + amount));
         input.value = '';
         loadAllUsers();
     } catch (err) { alert('ত্রুটি: ' + err.message); }
 }
 
 async function approveLoan(docId, uid, loanAmount) {
-    if (!confirm(`এই লোন Approve করবেন? ইউজারের ব্যালেন্সে ৳ ${loanAmount} যোগ হবে।`)) return;
+    if (!confirm('এই লোন Approve করবেন? ইউজারের ব্যালেন্সে ৳ ' + loanAmount + ' যোগ হবে।')) return;
     try {
         await db.collection('loanApplications').doc(docId).update({
             status: 'approved',
