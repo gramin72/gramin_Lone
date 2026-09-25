@@ -1,22 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>গ্রামীণ ঋণ</title>
-<!-- FontAwesome Icons -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 body { background-color: #f5f6fa; display: flex; justify-content: center; min-height: 100vh; }
 .mobile-container { width: 100%; max-width: 414px; background-color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.1); position: relative; padding-bottom: 70px; }
-
-/* Page Views */
 .page { display: none; }
 .page.active { display: block; }
-
-/* --- Header Styles --- */
 .top-header { background-color: #d32f2f; color: #ffffff; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
 .sub-header { background-color: #d32f2f; color: #ffffff; padding: 12px; display: flex; align-items: center; gap: 10px; }
 .sub-header i { cursor: pointer; font-size: 16px; color: #fff; }
@@ -26,8 +20,6 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
 .user-details h1 { font-size: 13px; font-weight: bold; }
 .user-details p { font-size: 10px; opacity: 0.9; }
 .balance-badge { background-color: #ffffff; color: #d32f2f; padding: 5px 12px; border-radius: 15px; font-size: 11px; font-weight: bold; display: flex; align-items: center; gap: 4px; }
-
-/* --- Home Page UI --- */
 .content { padding: 16px; text-align: center; }
 .welcome-title { font-size: 18px; font-weight: bold; color: #222; margin-top: 5px; }
 .welcome-sub { font-size: 12px; color: #666; margin-bottom: 15px; }
@@ -37,14 +29,9 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
 .service-card { background-color: #f9f9f9; border: 1px solid #eee; border-radius: 12px; padding: 12px 5px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; }
 .service-card i { font-size: 20px; }
 .service-card span { font-size: 11px; color: #333; font-weight: 500; }
-.icon-blue { color: #1e88e5; }
-.icon-green { color: #43a047; }
-.icon-yellow { color: #fdd835; }
-.icon-purple { color: #8e24aa; }
-.icon-red { color: #e53935; }
-.icon-teal { color: #00acc1; }
-.icon-whatsapp { color: #25d366; }
-.icon-orange { color: #fb8c00; }
+.icon-blue { color: #1e88e5; } .icon-green { color: #43a047; } .icon-yellow { color: #fdd835; }
+.icon-purple { color: #8e24aa; } .icon-red { color: #e53935; } .icon-teal { color: #00acc1; }
+.icon-whatsapp { color: #25d366; } .icon-orange { color: #fb8c00; }
 .section-title { font-size: 16px; font-weight: bold; color: #222; margin-bottom: 12px; text-align: left; }
 .reviews-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 20px; }
 .review-card { min-width: 180px; background: #fafafa; border: 1px solid #eee; border-radius: 10px; padding: 12px; text-align: left; font-size: 11px; }
@@ -53,43 +40,32 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
 .review-card .text { color: #555; line-height: 1.3; }
 .partners-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
 .partner-card { background: #fafafa; border: 1px solid #eee; padding: 10px; border-radius: 8px; font-size: 11px; font-weight: bold; color: #444; text-align: center; }
-
-/* --- Form Elements --- */
 .form-container { padding: 20px 16px; }
 .form-title { font-size: 18px; font-weight: bold; text-align: center; color: #c62828; margin-bottom: 20px; }
 .form-group { margin-bottom: 15px; text-align: left; }
 .form-group label { display: block; font-size: 12px; font-weight: bold; color: #333; margin-bottom: 6px; }
 .form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; outline: none; background: #fff; }
 .action-btn { width: 100%; background-color: #d32f2f; color: white; border: none; padding: 12px; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-
-/* --- Loan Summary Styling --- */
 .summary-card { padding: 15px; text-align: left; font-size: 12px; color: #333; }
 .summary-section { margin-bottom: 15px; }
 .summary-section h4 { font-size: 13px; font-weight: bold; margin-bottom: 6px; color: #111; border-bottom: 1px dashed #ccc; padding-bottom: 4px; }
 .summary-row { display: flex; justify-content: space-between; margin-bottom: 4px; color: #555; }
 .schedule-item { margin-top: 10px; padding-left: 10px; border-left: 3px solid #d32f2f; }
 .schedule-date { font-weight: bold; color: #d32f2f; }
-
-/* --- NID Upload Styling --- */
 .upload-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
 .upload-box { border: 2px dashed #ccc; border-radius: 8px; height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative; background: #fafafa; overflow: hidden; }
 .upload-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
 .upload-box span { font-size: 11px; color: #777; text-align: center; }
-
-/* --- Modals / Popups --- */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 100; }
 .modal-overlay.active { display: flex; }
-.alert-box { background: #2d3238; color: #fff; width: 85%; max-width: 320px; border-radius: 12px; padding: 20px; text-align: left; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+.alert-box { background: #2d3238; color: #fff; width: 85%; max-width: 320px; border-radius: 12px; padding: 20px; text-align: left; }
 .alert-box h4 { font-size: 15px; margin-bottom: 10px; font-weight: normal; }
 .alert-box p { font-size: 13px; color: #ccc; line-height: 1.4; margin-bottom: 20px; }
 .alert-btn { text-align: right; color: #8ab4f8; font-weight: bold; font-size: 13px; cursor: pointer; }
-
 .deposit-card { background: #fff; width: 90%; max-width: 350px; border-radius: 16px; padding: 20px; text-align: left; }
 .deposit-header { color: #d32f2f; font-weight: bold; font-size: 15px; display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
 .deposit-body { font-size: 12px; color: #444; line-height: 1.5; }
 .deposit-body h4 { color: #d32f2f; margin: 12px 0 6px; font-size: 13px; }
-
-/* --- Photo 2 Exact Style --- */
 .checkout-container { padding: 30px 20px; text-align: center; background-color: #f7f9fd; min-height: 100vh; }
 .checkout-logo-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 8px; }
 .brand-circle-logo { width: 90px; height: 90px; border-radius: 50%; border: 1px solid #7da7d9; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
@@ -97,65 +73,89 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
 .leaf-icon { color: #43a047; font-size: 14px; margin-top: -6px; }
 .logo-text { font-size: 10px; font-weight: bold; color: #2e7d32; margin-top: 2px; }
 .brand-title-text { font-size: 18px; font-weight: bold; color: #455a64; margin-bottom: 15px; }
-
 .checkout-icons { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
 .checkout-icons .icon-btn { width: 36px; height: 36px; border: 1px solid #d0d7de; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #666; background: #fff; font-size: 14px; }
-
 .payment-header-bar { background: #004fb6; color: white; padding: 12px; font-size: 13px; font-weight: bold; border-radius: 5px; margin-bottom: 15px; text-align: center; }
-
 .payment-methods-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; }
-.method-card { background: #fff; border: 1px solid #dcdcdc; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; height: 95px; text-align: center; position: relative; }
+.method-card { background: #fff; border: 1px solid #dcdcdc; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; height: 95px; text-align: center; }
 .method-card.selected { border: 1.5px solid #004fb6; }
 .method-card img { height: 28px; object-fit: contain; margin-bottom: 4px; }
-.method-card .method-title { font-size: 11px; font-weight: bold; color: #333; margin-top: 2px; }
-.method-card .method-sub { font-size: 9px; color: #777; margin-top: 1px; }
-
+.method-card .method-title { font-size: 11px; font-weight: bold; color: #333; }
+.method-card .method-sub { font-size: 9px; color: #777; }
 .pay-btn-bottom { width: 100%; background-color: #d8e5fc; color: #004fb6; border: none; padding: 14px; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; }
-
-/* Gateway Details */
 .gateway-container { padding: 15px; background: #f7f9fc; min-height: 100vh; }
-.gateway-card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.gateway-card { background: #fff; border-radius: 12px; padding: 20px; }
 .gateway-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
 .gateway-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: bold; color: #333; }
 .gateway-brand img { height: 26px; object-fit: contain; }
 .gateway-amount { font-size: 16px; font-weight: bold; color: #222; border: 1px solid #eee; padding: 6px 12px; border-radius: 6px; background: #fafafa; }
 .instruction-list { text-align: left; font-size: 11px; color: #444; line-height: 2; margin-bottom: 15px; background: #fafafa; padding: 10px; border-radius: 8px; }
 .copy-chip { background: #0d6efd; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 10px; cursor: pointer; margin-left: 5px; display: inline-flex; align-items: center; gap: 3px; }
-
-/* Auth Pages */
 .auth-container { padding: 40px 20px 20px; display: flex; flex-direction: column; align-items: center; }
-.logo-circle { width: 100px; height: 100px; background-color: #ffffff; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); margin-bottom: -40px; z-index: 2; }
-.auth-card { background-color: #ffffff; width: 100%; border-radius: 20px; padding: 55px 24px 30px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); text-align: center; z-index: 1; }
-.auth-card h2 { font-size: 24px; color: #222222; margin-bottom: 22px; font-weight: bold; }
+.logo-circle { width: 100px; height: 100px; background-color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: -40px; z-index: 2; }
+.auth-card { background-color: #ffffff; width: 100%; border-radius: 20px; padding: 55px 24px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); text-align: center; z-index: 1; }
+.auth-card h2 { font-size: 24px; color: #222; margin-bottom: 22px; font-weight: bold; }
 .input-group { text-align: left; margin-bottom: 16px; }
-.input-group label { display: block; font-size: 13px; color: #555555; margin-bottom: 8px; font-weight: 500; }
+.input-group label { display: block; font-size: 13px; color: #555; margin-bottom: 8px; font-weight: 500; }
 .input-wrapper { position: relative; display: flex; align-items: center; }
-.input-wrapper i { position: absolute; left: 14px; color: #888888; font-size: 16px; pointer-events: none; }
-.input-wrapper input, .input-wrapper select { width: 100%; padding: 12px 14px 12px 42px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; outline: none; color: #333; background-color: #ffffff; }
-.submit-btn { width: 100%; background-color: #d32f2f; color: #ffffff; border: none; padding: 14px; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; }
-.footer-text { margin-top: 22px; font-size: 14px; color: #444444; }
+.input-wrapper i { position: absolute; left: 14px; color: #888; font-size: 16px; pointer-events: none; }
+.input-wrapper input, .input-wrapper select { width: 100%; padding: 12px 14px 12px 42px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; outline: none; color: #333; background-color: #fff; }
+.submit-btn { width: 100%; background-color: #d32f2f; color: #fff; border: none; padding: 14px; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; }
+.footer-text { margin-top: 22px; font-size: 14px; color: #444; }
 .footer-text a { color: #d32f2f; text-decoration: none; font-weight: bold; display: block; margin-top: 4px; cursor: pointer; }
-
-/* Bottom Nav */
 .bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 414px; background: #ffffff; border-top: 1px solid #eee; display: flex; justify-content: space-around; padding: 8px 0; z-index: 10; }
 .nav-item { display: flex; flex-direction: column; align-items: center; color: #777; text-decoration: none; font-size: 10px; cursor: pointer; }
 .nav-item.active { color: #d32f2f; font-weight: bold; }
 .nav-item i { font-size: 18px; margin-bottom: 2px; }
+
+/* ADMIN STYLES */
+.admin-tab { flex:1; padding:10px 5px; border:1px solid #ddd; background:#fff; border-radius:6px; font-size:12px; font-weight:bold; cursor:pointer; color:#555; }
+.admin-tab.active { background:#d32f2f; color:#fff; border-color:#d32f2f; }
+.admin-card { background:#fff; border:1px solid #eee; border-radius:10px; padding:12px; margin-bottom:12px; font-size:12px; text-align:left; box-shadow:0 2px 6px rgba(0,0,0,0.04); }
+.admin-card .title { font-weight:bold; color:#d32f2f; font-size:14px; margin-bottom:6px; padding-bottom:6px; border-bottom:1px solid #f0f0f0; }
+.admin-btn { padding:6px 12px; border:none; border-radius:5px; font-size:11px; font-weight:bold; cursor:pointer; margin-right:5px; margin-top:6px; }
+.btn-green { background:#2e7d32; color:#fff; }
+.btn-red { background:#d32f2f; color:#fff; }
+.btn-blue { background:#1976d2; color:#fff; }
+.badge { display:inline-block; padding:2px 8px; border-radius:10px; font-size:10px; font-weight:bold; }
+.badge-pending { background:#fff3cd; color:#856404; }
+.badge-approved { background:#d4edda; color:#155724; }
+.badge-rejected { background:#f8d7da; color:#721c24; }
+.admin-header-btn { background: rgba(255,255,255,0.2); color:#fff; border:1px solid #fff; padding:4px 10px; border-radius:12px; font-weight:bold; font-size:11px; cursor:pointer; margin-left:6px; }
+.nid-mini-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:8px; }
+.nid-mini { border:1px solid #ddd; border-radius:6px; overflow:hidden; cursor:pointer; background:#fafafa; }
+.nid-mini img { width:100%; height:80px; object-fit:cover; display:block; }
+.nid-mini span { display:block; font-size:9px; text-align:center; padding:3px; background:#f0f0f0; color:#666; font-weight:bold; }
+.info-row { display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px dotted #eee; font-size:11px; }
+.info-row:last-child { border-bottom:none; }
+.info-row b { color:#222; }
+.stat-box { background:#f8f9fa; border-radius:6px; padding:8px 10px; margin-top:10px; font-size:11px; }
+.stat-box .green { color:#2e7d32; font-weight:bold; }
+.stat-box .blue { color:#1976d2; font-weight:bold; }
+.stat-row { display:flex; justify-content:space-between; padding:3px 0; }
+.payment-item { background:#fff8e1; border-left:3px solid #f9a825; padding:6px 8px; border-radius:4px; margin-top:6px; font-size:10px; }
+.section-label { font-size:11px; font-weight:bold; color:#555; margin-top:10px; margin-bottom:4px; }
 </style>
+
+<!-- FIREBASE SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
 </head>
 <body>
 
 <div class="mobile-container">
 
-    <!-- ================= HOME PAGE ================= -->
+    <!-- HOME PAGE -->
     <div id="homePage" class="page active">
         <div class="top-header" id="topHeader"></div>
         <div class="content">
             <h2 class="welcome-title">স্বাগতম, জনাব!</h2>
-            <p class="welcome-sub">আপনার আর্থিক সহায়তার জন্য আমরা প্রস্তুত</p>
+            <p class="welcome-sub">আপনার আর্থিক সহায়তার জন্য আমরা প্রস্তুত</p>
             <div class="promo-banner">
                 <div class="banner-text">
-                    <h3>"ছোট ঋণ, বড় স্বপ্ন!"</h3>
+                    <h3>"ছোট ঋণ, বড় স্বপ্ন!"</h3>
                     <p>"৫,০০০ টাকা থেকে শুরু<br>দ্রুত এবং সহজ"</p>
                 </div>
                 <i class="fa-solid fa-hand-holding-dollar" style="font-size: 48px;"></i>
@@ -178,7 +178,7 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
                 <div class="review-card">
                     <div class="name">রিমা আক্তার</div>
                     <div class="date">25 May, 2026</div>
-                    <div class="text">আমি সত্যিই অবাক হয়েছি এত সহজে লোন পাওয়ার কারণে। খুব ভালো সার্ভিস!</div>
+                    <div class="text">আমি সত্যিই অবাক হয়েছি এত সহজে লোন পাওয়ার কারণে। খুব ভালো সার্ভিস!</div>
                 </div>
                 <div class="review-card">
                     <div class="name">সোহেল রানা</div>
@@ -190,7 +190,7 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
             <div class="partners-grid">
                 <div class="partner-card">গ্রামীণ ব্যাংক</div>
                 <div class="partner-card">ব্র্যাক ব্যাংক</div>
-                <div class="partner-card">সোণালী ব্যাংক</div>
+                <div class="partner-card">সোনালী ব্যাংক</div>
             </div>
         </div>
         <div class="bottom-nav">
@@ -200,7 +200,7 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
         </div>
     </div>
 
-    <!-- ================= LOAN APPLICATION PAGE ================= -->
+    <!-- LOAN APPLICATION PAGE -->
     <div id="loanPage" class="page">
         <div class="sub-header">
             <i class="fa-solid fa-arrow-left" onclick="showPage('homePage')"></i>
@@ -225,7 +225,7 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>মেয়াদ (মাস):</label>
+                    <label>মেয়াদ (মাস):</label>
                     <select id="loanDuration" class="form-control" required>
                         <option value="3">৩ মাস</option>
                         <option value="5">৫ মাস</option>
@@ -248,7 +248,7 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
         </div>
     </div>
 
-    <!-- ================= LOAN SUMMARY PAGE ================= -->
+    <!-- LOAN SUMMARY PAGE -->
     <div id="summaryPage" class="page">
         <div class="sub-header">
             <i class="fa-solid fa-arrow-left" onclick="showPage('loanPage')"></i>
@@ -259,30 +259,30 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
                 <h4>অ্যামাউন্ট বিস্তারিত</h4>
                 <div class="summary-row"><span>নাম:</span><span id="sumName">-</span></div>
                 <div class="summary-row"><span>লোনের কারণ:</span><span id="sumReason">-</span></div>
-                <div class="summary-row"><span>লোন নিয়েছেন:</span><span id="sumAmount">-</span></div>
+                <div class="summary-row"><span>লোন নিয়েছেন:</span><span id="sumAmount">-</span></div>
             </div>
             <div class="summary-section">
                 <h4>কিস্তি পরিশোধের প্ল্যান</h4>
-                <div class="summary-row"><span>মোট পরিশোধযোগ্য অ্যামাউন্ট:</span><span id="sumTotalPay">-</span></div>
+                <div class="summary-row"><span>মোট পরিশোধযোগ্য:</span><span id="sumTotalPay">-</span></div>
                 <div class="summary-row"><span>মোট ইন্টারেস্ট:</span><span id="sumInterest">-</span></div>
                 <div class="summary-row"><span>ইন্টারেস্ট রেট:</span><span>3%</span></div>
             </div>
-            <button class="action-btn" style="border-radius: 20px; margin: 15px 0;" onclick="showPage('nidPage')">এগিয়ে যান</button>
+            <button class="action-btn" style="border-radius: 20px; margin: 15px 0;" onclick="showPage('nidPage')">এগিয়ে যান</button>
             <div class="summary-section">
-                <h4>পরিশোধের সময়সূচি</h4>
+                <h4>পরিশোধের সময়সূচি</h4>
                 <div id="scheduleContainer"></div>
             </div>
         </div>
     </div>
 
-    <!-- ================= NID UPLOAD PAGE ================= -->
+    <!-- NID UPLOAD PAGE -->
     <div id="nidPage" class="page">
         <div class="sub-header">
             <i class="fa-solid fa-arrow-left" onclick="showPage('summaryPage')"></i>
-            <h2>LOAN APPLICATION</h2>
+            <h2>NID UPLOAD</h2>
         </div>
         <div class="form-container" style="text-align: center;">
-            <h4 style="color: #d32f2f; font-size: 14px;">জাতীয় পরিচয়পত্র আপলোড</h4>
+            <h4 style="color: #d32f2f; font-size: 14px;">জাতীয় পরিচয়পত্র আপলোড</h4>
             <p id="nidNotice" style="font-size: 10px; color: #666; margin-top: 5px;"></p>
             <div class="upload-grid">
                 <div class="upload-box" onclick="document.getElementById('nidFront').click()">
@@ -296,14 +296,13 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
                     <span id="backText">NID Back Image</span>
                 </div>
             </div>
-            <button class="action-btn" onclick="submitDocuments()">ডকুমেন্ট জমা দিন</button>
+            <button class="action-btn" id="uploadBtn" onclick="submitDocuments()">ডকুমেন্ট জমা দিন</button>
         </div>
     </div>
 
-    <!-- ================= PAYMENT SELECTOR PAGE (Exact Photo 2 Design) ================= -->
+    <!-- PAYMENT SELECTOR PAGE -->
     <div id="paymentSelectPage" class="page">
         <div class="checkout-container">
-            <!-- Round Logo Design (Photo 2) -->
             <div class="checkout-logo-wrap">
                 <div class="brand-circle-logo">
                     <i class="fa-solid fa-house house-icon"></i>
@@ -311,116 +310,93 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
                     <span class="logo-text">গ্রামীণ ঋণ</span>
                 </div>
             </div>
-            
             <h3 class="brand-title-text">গ্রামীণ লোন</h3>
-            
             <div class="checkout-icons">
                 <div class="icon-btn"><i class="fa-solid fa-headset"></i></div>
                 <div class="icon-btn"><i class="fa-regular fa-question-circle"></i></div>
                 <div class="icon-btn"><i class="fa-solid fa-info"></i></div>
             </div>
-            
-            <div class="payment-header-bar">
-                পেমেন্ট পদ্ধতি নির্বাচন করুন
-            </div>
-            
+            <div class="payment-header-bar">পেমেন্ট পদ্ধতি নির্বাচন করুন</div>
             <div class="payment-methods-grid">
-                <!-- bKash -->
                 <div class="method-card" id="method-bkash" onclick="selectPaymentMethod('bKash')">
                     <img src="https://community.bikroy.com/wp-content/uploads/2020/08/bKash-logo-1024x538.png" alt="bKash">
                     <span class="method-title">bKash</span>
-                    <span class="method-sub">বিকাশ পার্সোনাল (সেন্ড মানি)</span>
+                    <span class="method-sub">বিকাশ পার্সোনাল</span>
                 </div>
-                
-                <!-- Nagad -->
                 <div class="method-card selected" id="method-nagad" onclick="selectPaymentMethod('Nagad')">
                     <img src="https://download.logo.wine/logo/Nagad/Nagad-Logo.wine.png" alt="Nagad">
                     <span class="method-title">নগদ</span>
-                    <span class="method-sub">নগদ পার্সোনাল (সেন্ড মানি)</span>
+                    <span class="method-sub">নগদ পার্সোনাল</span>
                 </div>
-                
-                <!-- Rocket -->
                 <div class="method-card" id="method-rocket" onclick="selectPaymentMethod('Rocket')">
                     <img src="https://seeklogo.com/images/D/dutch-bangla-rocket-logo-B4D1CC458D-seeklogo.com.png" alt="Rocket">
                     <span class="method-title">রকেট</span>
-                    <span class="method-sub">রকেট পার্সোনাল (সেন্ড মানি)</span>
+                    <span class="method-sub">রকেট পার্সোনাল</span>
                 </div>
             </div>
-            
             <button id="paySubmitBtn" class="pay-btn-bottom" onclick="proceedToGateway()">
                 Pay 519.00 BDT
             </button>
         </div>
     </div>
 
-    <!-- ================= PAYMENT GATEWAY DETAILS PAGE (Photo 3, 5) ================= -->
+    <!-- PAYMENT GATEWAY PAGE -->
     <div id="paymentGatewayPage" class="page">
         <div class="gateway-container">
             <div class="gateway-card">
                 <div class="gateway-header">
                     <div class="gateway-brand">
-                        <img id="gatewayLogoImg" src="" alt="logo" style="height:28px;">
+                        <img id="gatewayLogoImg" src="" alt="logo">
                         <span id="gatewayName">-</span>
                     </div>
                     <div class="gateway-amount" id="gatewayAmountText">0 BDT</div>
                 </div>
-                
                 <div class="instruction-list">
                     <p>• আপনার <strong id="instructionMethodName">-</strong> মোবাইল অ্যাপে যান।</p>
                     <p>• <strong>Send Money</strong>-এ ক্লিক করুন।</p>
-                    <p>
-                        • প্রাপক নম্বর হিসেবে এই নম্বরটি লিখুন: 
-                        <strong id="gatewayNumber">-</strong> 
-                        <span class="copy-chip" onclick="copyGatewayNumber()"><i class="fa-regular fa-copy"></i> কপি করুন</span>
-                    </p>
-                    <p>
-                        • টাকার পরিমাণঃ 
-                        <strong id="gatewayAmountInstruction">0</strong> 
-                        <span class="copy-chip" onclick="copyGatewayAmount()"><i class="fa-regular fa-copy"></i> কপি করুন</span>
-                    </p>
-                    <p>• নিশ্চিত করতে এখন আপনার <strong id="instructionMethodName2">-</strong> পিন লিখুন।</p>
-                    <p>• এখন নিচের বাক্সে আপনার <strong>Transaction ID</strong> দিন এবং নিচের Verify বাটনে ক্লিক করুন।</p>
+                    <p>• প্রাপক নম্বর: <strong id="gatewayNumber">-</strong>
+                        <span class="copy-chip" onclick="copyGatewayNumber()"><i class="fa-regular fa-copy"></i> কপি</span></p>
+                    <p>• টাকার পরিমাণঃ <strong id="gatewayAmountInstruction">0</strong>
+                        <span class="copy-chip" onclick="copyGatewayAmount()"><i class="fa-regular fa-copy"></i> কপি</span></p>
+                    <p>• আপনার <strong id="instructionMethodName2">-</strong> পিন লিখে নিশ্চিত করুন।</p>
+                    <p>• Transaction ID দিন এবং VERIFY ক্লিক করুন।</p>
                 </div>
-                
                 <form onsubmit="handlePaymentVerify(event)">
                     <div class="form-group">
                         <label style="font-size: 11px; font-weight: bold;">Transaction ID</label>
                         <input type="text" id="trxIdInput" class="form-control" placeholder="ট্রানজেকশন আইডি লিখুন" required>
                     </div>
-                    <button type="submit" class="action-btn" style="background-color: #0d6efd; border-radius: 6px;">VERIFY</button>
+                    <button type="submit" class="action-btn" style="background-color: #0d6efd;">VERIFY</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- ================= CASHOUT PAGE ================= -->
+    <!-- CASHOUT PAGE -->
     <div id="cashoutPage" class="page">
         <div class="sub-header">
             <i class="fa-solid fa-arrow-left" onclick="showPage('homePage')"></i>
             <h2>CASH OUT</h2>
         </div>
         <div class="form-container">
-            <p style="font-size: 11px; text-align: center; color: #555; margin-bottom: 12px;">উত্তোলনের সর্বোচ্চ ২-৩ মিনিটের মধ্যে পেয়ে যাবেন।</p>
             <div style="background:#f5f6fa; padding:15px; border-radius:8px; margin-bottom:15px; text-align:center;">
                 <p style="font-size:12px; color:#666;">আপনার বর্তমান ব্যালেন্স:</p>
-                <h3 style="color:#2e7d32; font-size:20px;">৳ 0.00</h3>
+                <h3 id="cashoutBalance" style="color:#2e7d32; font-size:20px;">৳ 0.00</h3>
             </div>
-            <form onsubmit="event.preventDefault(); alert('ক্যাশ আউট অনুরোধ সফল হয়েছে!'); showPage('homePage');">
+            <form onsubmit="event.preventDefault(); alert('ক্যাশ আউট অনুরোধ সফল হয়েছে!'); showPage('homePage');">
                 <div class="form-group">
-                    <label>উত্তোলনের পরিমাণ লিখুন:</label>
+                    <label>উত্তোলনের পরিমাণ:</label>
                     <input type="number" class="form-control" placeholder="যেমন: ১০০০" min="1000" required>
                 </div>
                 <div class="form-group">
-                    <label>উত্তোলনের মাধ্যম:</label>
+                    <label>মাধ্যম:</label>
                     <select class="form-control" required>
                         <option value="" disabled selected>- নির্বাচন করুন -</option>
-                        <option value="bkash">বিকাশ (bKash)</option>
-                        <option value="nagad">নগদ (Nagad)</option>
-                        <option value="rocket">রকেট (Rocket)</option>
+                        <option>bKash</option><option>Nagad</option><option>Rocket</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>নম্বর/একাউন্ট:</label>
+                    <label>নম্বর:</label>
                     <input type="tel" class="form-control" placeholder="01XXXXXXXXX" required>
                 </div>
                 <button type="submit" class="action-btn" style="background-color: #e91e63;">উত্তোলন করুন</button>
@@ -428,18 +404,18 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
         </div>
     </div>
 
-    <!-- ================= MY LOANS / TRANSACTIONS PAGE ================= -->
+    <!-- MY LOANS PAGE -->
     <div id="myLoansPage" class="page">
         <div class="sub-header">
             <i class="fa-solid fa-arrow-left" onclick="showPage('homePage')"></i>
             <h2>MY LOANS</h2>
         </div>
-        <div style="padding: 15px; text-align:center; color:#777; font-size:13px;">
-            কোনো ডাটা পাওয়া যায়নি।
+        <div style="padding: 15px;" id="myLoansContent">
+            <p style="text-align:center; color:#777; font-size:13px;">লোড হচ্ছে...</p>
         </div>
     </div>
 
-    <!-- ================= ABOUT & TERMS PAGE ================= -->
+    <!-- ABOUT PAGE -->
     <div id="aboutPage" class="page">
         <div class="sub-header">
             <i class="fa-solid fa-arrow-left" onclick="showPage('homePage')"></i>
@@ -447,11 +423,11 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
         </div>
         <div style="padding:15px; font-size:12px; line-height:1.6; color:#444;">
             <h2 style="font-size: 16px; font-weight: bold; color: #222;">গ্রামীণ ঋণ সম্পর্কে</h2>
-            <p>গ্রামীণ ঋণ একটি নির্ভরযোগ্য ডিজিটাল লোন প্ল্যাটফর্ম যা ব্যক্তিগত অর্থায়নকে সহজ, দ্রুত এবং সবার জন্য সহজলভ্য করে তোলে।</p>
+            <p>গ্রামীণ ঋণ একটি নির্ভরযোগ্য ডিজিটাল লোন প্ল্যাটফর্ম।</p>
         </div>
     </div>
 
-    <!-- ================= PROFILE PAGE ================= -->
+    <!-- PROFILE PAGE -->
     <div id="profilePage" class="page">
         <div class="sub-header">
             <i class="fa-solid fa-arrow-left" onclick="showPage('homePage')"></i>
@@ -460,32 +436,45 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
         <div class="form-container" style="text-align:center;">
             <div style="font-size:50px; color:#d32f2f; margin-bottom:10px;"><i class="fa-solid fa-circle-user"></i></div>
             <h3 id="profName">-</h3>
-            <p id="profPhone" style="color:#666; font-size:12px; margin-bottom:15px;">-</p>
+            <p id="profPhone" style="color:#666; font-size:12px; margin-bottom:5px;">-</p>
+            <p id="profBalance" style="color:#2e7d32; font-size:14px; font-weight:bold; margin-bottom:15px;">৳ 0.00</p>
             <button class="action-btn" onclick="logout()">লগআউট করুন</button>
         </div>
     </div>
 
-    <!-- ================= LOGIN PAGE ================= -->
+    <!-- ADMIN PAGE -->
+    <div id="adminPage" class="page">
+        <div class="sub-header">
+            <i class="fa-solid fa-arrow-left" onclick="showPage('homePage')"></i>
+            <h2>ADMIN PANEL</h2>
+        </div>
+        <div style="padding: 12px;">
+            <div style="display:flex; gap:6px; margin-bottom:12px;">
+                <button id="tab-users" class="admin-tab active" onclick="adminTab('users')">ইউজার</button>
+                <button id="tab-loans" class="admin-tab" onclick="adminTab('loans')">লোন</button>
+                <button id="tab-payments" class="admin-tab" onclick="adminTab('payments')">পেমেন্ট</button>
+            </div>
+            <div id="adminContent">লোড হচ্ছে...</div>
+        </div>
+    </div>
+
+    <!-- LOGIN PAGE -->
     <div id="loginPage" class="page">
         <div class="auth-container">
-            <div class="logo-circle">
-                <i class="fa-solid fa-house" style="color:#d32f2f; font-size:32px;"></i>
-            </div>
+            <div class="logo-circle"><i class="fa-solid fa-house" style="color:#d32f2f; font-size:32px;"></i></div>
             <div class="auth-card">
                 <h2>লগইন করুন</h2>
                 <form id="loginForm">
                     <div class="input-group">
                         <label>মোবাইল নম্বর</label>
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-phone"></i>
+                        <div class="input-wrapper"><i class="fa-solid fa-phone"></i>
                             <input type="tel" id="loginPhone" placeholder="01XXXXXXXXX" required>
                         </div>
                     </div>
                     <div class="input-group">
                         <label>পাসওয়ার্ড</label>
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-lock"></i>
-                            <input type="password" id="loginPassword" placeholder="পাসওয়ার্ড লিখুন" required>
+                        <div class="input-wrapper"><i class="fa-solid fa-lock"></i>
+                            <input type="password" id="loginPassword" placeholder="পাসওয়ার্ড" required>
                         </div>
                     </div>
                     <button type="submit" class="submit-btn"><i class="fa-solid fa-right-to-bracket"></i> লগইন করুন</button>
@@ -498,34 +487,29 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
         </div>
     </div>
 
-    <!-- ================= REGISTER PAGE ================= -->
+    <!-- REGISTER PAGE -->
     <div id="registerPage" class="page">
         <div class="auth-container">
-            <div class="logo-circle">
-                <i class="fa-solid fa-house" style="color:#d32f2f; font-size:32px;"></i>
-            </div>
+            <div class="logo-circle"><i class="fa-solid fa-house" style="color:#d32f2f; font-size:32px;"></i></div>
             <div class="auth-card">
                 <h2>নিবন্ধন করুন</h2>
                 <form id="registerForm">
                     <div class="input-group">
                         <label>পুরো নাম</label>
-                        <div class="input-wrapper">
-                            <i class="fa-regular fa-user"></i>
-                            <input type="text" id="regName" placeholder="আপনার নাম লিখুন" required>
+                        <div class="input-wrapper"><i class="fa-regular fa-user"></i>
+                            <input type="text" id="regName" placeholder="আপনার নাম" required>
                         </div>
                     </div>
                     <div class="input-group">
                         <label>মোবাইল নম্বর</label>
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-phone"></i>
+                        <div class="input-wrapper"><i class="fa-solid fa-phone"></i>
                             <input type="tel" id="regPhone" placeholder="01XXXXXXXXX" required>
                         </div>
                     </div>
                     <div class="input-group">
-                        <label>পাসওয়ার্ড</label>
-                        <div class="input-wrapper">
-                            <i class="fa-solid fa-lock"></i>
-                            <input type="password" id="regPassword" placeholder="পাসওয়ার্ড লিখুন" required>
+                        <label>পাসওয়ার্ড (৬+ অক্ষর)</label>
+                        <div class="input-wrapper"><i class="fa-solid fa-lock"></i>
+                            <input type="password" id="regPassword" placeholder="পাসওয়ার্ড" minlength="6" required>
                         </div>
                     </div>
                     <button type="submit" class="submit-btn"><i class="fa-solid fa-user-plus"></i> নিবন্ধন করুন</button>
@@ -540,7 +524,7 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
 
 </div>
 
-<!-- ================= MODALS ================= -->
+<!-- MODALS -->
 <div id="alertModal" class="modal-overlay">
     <div class="alert-box">
         <h4>grameen-loans.com says</h4>
@@ -551,90 +535,126 @@ body { background-color: #f5f6fa; display: flex; justify-content: center; min-he
 
 <div id="depositModal" class="modal-overlay">
     <div class="deposit-card">
-        <div class="deposit-header">
-            <i class="fa-solid fa-circle-info"></i> বিশেষ দৃষ্টি আকর্ষণ:
-        </div>
+        <div class="deposit-header"><i class="fa-solid fa-circle-info"></i> বিশেষ দৃষ্টি আকর্ষণ:</div>
         <div class="deposit-body">
-            <p id="depositText">আপনি 5000 টাকা লোন নিতে চাইলে আপনাকে 519 টাকা জামানত জমা দিতে হবে। আপনি বিকাশ অথবা নগদের মাধ্যমে জামানতের টাকা প্রদান করতে পারবেন।</p>
+            <p id="depositText"></p>
             <h4><i class="fa-solid fa-pen-to-square"></i> শর্তাবলি:</h4>
-            <p>আপনার লোন এপ্রুভ হওয়ার পরে লোনের টাকা ও জামানতের টাকা একসাথে ব্যালেন্সে পেয়ে যাবেন। অনুগ্রহ করে আগে জামানত প্রদান করুন।</p>
-            <button class="action-btn" style="margin-top: 15px; border-radius: 20px;" onclick="goToPaymentSelector()">পরবর্তী</button>
+            <p>লোন এপ্রুভ হওয়ার পর লোন ও জামানতের টাকা একসাথে ব্যালেন্সে পাবেন।</p>
+            <button class="action-btn" style="margin-top:15px; border-radius:20px;" onclick="goToPaymentSelector()">পরবর্তী</button>
         </div>
     </div>
 </div>
 
-<!-- ================= JAVASCRIPT LOGIC ================= -->
 <script>
-let currentApplication = {
-    name: '',
-    amount: 5000,
-    feeAmount: 519,
-    duration: 3,
-    reason: 'কৃষি',
-    hasFrontImg: false,
-    hasBackImg: false,
-    selectedMethod: 'Nagad'
+// ============ FIREBASE CONFIG ============
+const firebaseConfig = {
+    apiKey: "AIzaSyDZiUYrVcp90QCgD6QO2JvOteVQwE8BU_U",
+    authDomain: "gramin-6f62b.firebaseapp.com",
+    projectId: "gramin-6f62b",
+    storageBucket: "gramin-6f62b.firebasestorage.app",
+    messagingSenderId: "289420162799",
+    appId: "1:289420162799:web:9e7e6a37dacb6452160d1a",
+    measurementId: "G-52ZM581BQ6"
 };
 
-// Target Merchant Numbers
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+const storage = firebase.storage();
+
+function phoneToEmail(phone) {
+    return phone.replace(/\D/g, '') + '@gramin.app';
+}
+
+// ============ STATE ============
+let currentApplication = {
+    name: '', amount: 5000, feeAmount: 519, duration: 3,
+    reason: 'কৃষি', hasFrontImg: false, hasBackImg: false,
+    frontFile: null, backFile: null,
+    selectedMethod: 'Nagad', loanDocId: null
+};
+let currentUserProfile = null;
+let adminCurrentTab = 'users';
+
 const merchantNumbers = {
     'bKash': '01959196818',
     'Nagad': '01989070568',
     'Rocket': '01806518621'
 };
-
 const gatewayLogos = {
     'bKash': 'https://community.bikroy.com/wp-content/uploads/2020/08/bKash-logo-1024x538.png',
     'Nagad': 'https://download.logo.wine/logo/Nagad/Nagad-Logo.wine.png',
     'Rocket': 'https://seeklogo.com/images/D/dutch-bangla-rocket-logo-B4D1CC458D-seeklogo.com.png'
 };
 
-// Router
+// ============ AUTH LISTENER ============
+auth.onAuthStateChanged(async (user) => {
+    if (user) {
+        try {
+            const snap = await db.collection('users').doc(user.uid).get();
+            if (snap.exists) {
+                currentUserProfile = snap.data();
+            } else {
+                currentUserProfile = {
+                    uid: user.uid, name: user.displayName || 'User',
+                    phone: (user.email || '').split('@')[0], balance: 0, role: 'user'
+                };
+            }
+        } catch (e) { console.error(e); }
+    } else {
+        currentUserProfile = null;
+    }
+    renderHeader();
+});
+
+// ============ ROUTER ============
 function showPage(pageId) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(pageId).classList.add('active');
     window.scrollTo(0, 0);
-    
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (pageId === 'homePage') {
-        renderHeader();
-    } else if (pageId === 'loanPage' && currentUser) {
-        document.getElementById('loanUserName').value = currentUser.name;
-    } else if (pageId === 'profilePage' && currentUser) {
-        document.getElementById('profName').innerText = currentUser.name;
-        document.getElementById('profPhone').innerText = currentUser.phone;
+
+    if (pageId === 'homePage') renderHeader();
+    else if (pageId === 'loanPage' && currentUserProfile)
+        document.getElementById('loanUserName').value = currentUserProfile.name;
+    else if (pageId === 'profilePage' && currentUserProfile) {
+        document.getElementById('profName').innerText = currentUserProfile.name;
+        document.getElementById('profPhone').innerText = currentUserProfile.phone;
+        document.getElementById('profBalance').innerText = '৳ ' + (currentUserProfile.balance || 0) + '.00';
+    } else if (pageId === 'cashoutPage' && currentUserProfile) {
+        document.getElementById('cashoutBalance').innerText = '৳ ' + (currentUserProfile.balance || 0) + '.00';
+    } else if (pageId === 'myLoansPage') {
+        loadMyLoans();
+    } else if (pageId === 'adminPage') {
+        adminTab(adminCurrentTab);
     }
 }
 
-function closeModal(modalId) {
-    document.getElementById(modalId).classList.remove('active');
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+function handleNavAuth(target) {
+    if (currentUserProfile) showPage(target);
+    else showPage('loginPage');
 }
 
-function handleNavAuth(targetPage) {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser) {
-        showPage(targetPage);
-    } else {
-        showPage('loginPage');
-    }
-}
-
+// ============ HEADER ============
 function renderHeader() {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const topHeader = document.getElementById('topHeader');
-    if (currentUser) {
+    if (!topHeader) return;
+    if (currentUserProfile) {
+        const isAdmin = currentUserProfile.role === 'admin';
         topHeader.innerHTML = `
             <div class="brand-info" style="display:flex; align-items:center; gap:8px;">
                 <div class="brand-logo"><i class="fa-solid fa-house"></i></div>
                 <div class="user-details">
-                    <h1>${currentUser.name}</h1>
-                    <p>${currentUser.phone}</p>
+                    <h1>${currentUserProfile.name}</h1>
+                    <p>${currentUserProfile.phone}</p>
                 </div>
             </div>
-            <div class="balance-badge">
-                <i class="fa-solid fa-wallet"></i> ব্যালেন্স: 00 tk
-            </div>
-        `;
+            <div style="display:flex; align-items:center;">
+                ${isAdmin ? '<button class="admin-header-btn" onclick="showPage(\'adminPage\')"><i class="fa-solid fa-crown"></i> ADMIN</button>' : ''}
+                <div class="balance-badge" style="margin-left:6px;">
+                    <i class="fa-solid fa-wallet"></i> ${currentUserProfile.balance || 0} tk
+                </div>
+            </div>`;
     } else {
         topHeader.innerHTML = `
             <div class="brand-info" style="display:flex; align-items:center; gap:8px;">
@@ -644,18 +664,143 @@ function renderHeader() {
                     <p style="font-size:9px;">ডিজিটাল প্ল্যাটফর্ম</p>
                 </div>
             </div>
-            <button onclick="showPage('loginPage')" style="background:#fff; color:#d32f2f; border:none; padding:4px 10px; border-radius:12px; font-weight:bold; font-size:11px;">Login</button>
-        `;
+            <button onclick="showPage('loginPage')" style="background:#fff; color:#d32f2f; border:none; padding:4px 10px; border-radius:12px; font-weight:bold; font-size:11px;">Login</button>`;
     }
 }
 
-function handleLoanSubmit(e) {
+// ============ REGISTER (Fixed) ============
+document.getElementById('registerForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const name = document.getElementById('regName').value.trim();
+    const phone = document.getElementById('regPhone').value.trim();
+    const password = document.getElementById('regPassword').value;
+    const btn = this.querySelector('button[type="submit"]');
+    const oldText = btn.innerHTML;
+    btn.innerHTML = 'অপেক্ষা করুন...'; btn.disabled = true;
+
+    try {
+        const email = phoneToEmail(phone);
+        const cred = await auth.createUserWithEmailAndPassword(email, password);
+        await cred.user.updateProfile({ displayName: name });
+
+        // Firestore-এ সেভ
+        const userData = {
+            uid: cred.user.uid,
+            name: name,
+            phone: phone,
+            email: email,
+            balance: 0,
+            role: 'user',
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
+        await db.collection('users').doc(cred.user.uid).set(userData);
+
+        // সাথে সাথে currentUserProfile সেট করুন
+        currentUserProfile = userData;
+
+        // হেডার রেন্ডার করে হোম পেজ দেখান
+        renderHeader();
+        alert('নিবন্ধন সফল হয়েছে!');
+        this.reset();
+        showPage('homePage');
+
+    } catch (err) {
+        console.error(err);
+        if (err.code === 'auth/email-already-in-use') alert('এই নম্বরে অ্যাকাউন্ট আছে!');
+        else if (err.code === 'auth/weak-password') alert('পাসওয়ার্ড কমপক্ষে ৬ অক্ষর!');
+        else if (err.code === 'auth/invalid-email') alert('ফোন নম্বর সঠিকভাবে লিখুন!');
+        else alert('ত্রুটি: ' + err.message);
+    } finally { btn.innerHTML = oldText; btn.disabled = false; }
+});
+
+// ============ LOGIN (Fixed) ============
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const phone = document.getElementById('loginPhone').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const btn = this.querySelector('button[type="submit"]');
+    const oldText = btn.innerHTML;
+    btn.innerHTML = 'অপেক্ষা করুন...'; btn.disabled = true;
+
+    try {
+        // ১. লগইন করুন
+        const cred = await auth.signInWithEmailAndPassword(phoneToEmail(phone), password);
+
+        // ২. সাথে সাথে Firestore থেকে প্রোফাইল লোড করুন
+        let profileData = null;
+        try {
+            const snap = await db.collection('users').doc(cred.user.uid).get();
+            if (snap.exists) {
+                profileData = snap.data();
+            }
+        } catch (dbErr) {
+            console.error('Firestore read error:', dbErr);
+        }
+
+        // Firestore এ ডেটা না থাকলে ডিফল্ট
+        if (!profileData) {
+            profileData = {
+                uid: cred.user.uid,
+                name: cred.user.displayName || 'User',
+                phone: phone,
+                email: cred.user.email,
+                balance: 0,
+                role: 'user'
+            };
+        }
+
+        currentUserProfile = profileData;
+
+        // ৩. হেডার আপডেট করে হোম পেজ দেখান
+        renderHeader();
+        this.reset();
+        showPage('homePage');
+
+    } catch (err) {
+        console.error(err);
+        if (err.code === 'auth/user-not-found') alert('এই নম্বরে অ্যাকাউন্ট নেই!');
+        else if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') alert('পাসওয়ার্ড ভুল!');
+        else if (err.code === 'auth/invalid-email') alert('ফোন নম্বর সঠিকভাবে লিখুন!');
+        else alert('ত্রুটি: ' + err.message);
+    } finally { btn.innerHTML = oldText; btn.disabled = false; }
+});
+
+async function logout() {
+    await auth.signOut();
+    currentUserProfile = null;
+    alert('লগআউট সফল!');
+    showPage('homePage');
+}
+
+// ============ NID IMAGE PREVIEW ============
+function previewImage(input, targetImgId) {
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.getElementById(targetImgId);
+            img.src = e.target.result;
+            img.style.display = 'block';
+            if (targetImgId === 'frontImg') {
+                currentApplication.hasFrontImg = true;
+                currentApplication.frontFile = file;
+            }
+            if (targetImgId === 'backImg') {
+                currentApplication.hasBackImg = true;
+                currentApplication.backFile = file;
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// ============ LOAN SUBMIT ============
+async function handleLoanSubmit(e) {
     e.preventDefault();
     currentApplication.name = document.getElementById('loanUserName').value.trim();
     currentApplication.amount = parseFloat(document.getElementById('loanAmount').value);
     currentApplication.duration = parseInt(document.getElementById('loanDuration').value);
     currentApplication.reason = document.getElementById('loanReason').value;
-
     currentApplication.feeAmount = Math.round(currentApplication.amount * 0.1038);
 
     document.getElementById('sumName').innerText = currentApplication.name;
@@ -667,47 +812,66 @@ function handleLoanSubmit(e) {
     document.getElementById('sumTotalPay').innerText = '৳' + totalPayable.toLocaleString();
     document.getElementById('sumInterest').innerText = '৳' + interest;
 
-    const scheduleContainer = document.getElementById('scheduleContainer');
-    scheduleContainer.innerHTML = '';
-    
-    const perMonthTotal = Math.round(totalPayable / currentApplication.duration);
-    let currentDate = new Date();
-    
+    const sc = document.getElementById('scheduleContainer');
+    sc.innerHTML = '';
+    const perMonth = Math.round(totalPayable / currentApplication.duration);
+    let cd = new Date();
     for (let i = 1; i <= currentApplication.duration; i++) {
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        const dateStr = currentDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
-        scheduleContainer.innerHTML += `
-            <div class="schedule-item">
-                <div class="schedule-date">• ${dateStr}</div>
-                <div>৳${perMonthTotal}</div>
-            </div>
-        `;
+        cd.setMonth(cd.getMonth() + 1);
+        const d = cd.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+        sc.innerHTML += `<div class="schedule-item"><div class="schedule-date">• ${d}</div><div>৳${perMonth}</div></div>`;
     }
 
-    document.getElementById('nidNotice').innerText = `আপনি ${currentApplication.amount} টাকার লোনের জন্য আবেদন করেছেন ${currentApplication.duration} মাস মেয়াদে। দয়া করে আপনার জাতীয় পরিচয়পত্র আপলোড করুন।`;
+    document.getElementById('nidNotice').innerText = `আপনি ${currentApplication.amount} টাকার লোনের জন্য আবেদন করেছেন ${currentApplication.duration} মাস মেয়াদে। NID আপলোড করুন।`;
     showPage('summaryPage');
 }
 
-function previewImage(input, targetImgId) {
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const img = document.getElementById(targetImgId);
-            img.src = e.target.result;
-            img.style.display = 'block';
-            if (targetImgId === 'frontImg') currentApplication.hasFrontImg = true;
-            if (targetImgId === 'backImg') currentApplication.hasBackImg = true;
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-function submitDocuments() {
+// ============ SUBMIT DOCUMENTS (NID UPLOAD) ============
+async function submitDocuments() {
     if (!currentApplication.hasFrontImg || !currentApplication.hasBackImg) {
         document.getElementById('alertModal').classList.add('active');
-    } else {
-        document.getElementById('depositText').innerText = `আপনি ${currentApplication.amount} টাকা লোন নিতে চাইলে আপনাকে ${currentApplication.feeAmount} টাকা জামানত জমা দিতে হবে। আপনি বিকাশ অথবা নগদের মাধ্যমে জামানতের টাকা প্রদান করতে পারবেন।`;
+        return;
+    }
+    if (!auth.currentUser) { alert('লগইন করুন!'); return; }
+
+    const btn = document.getElementById('uploadBtn');
+    btn.innerText = 'আপলোড হচ্ছে...'; btn.disabled = true;
+
+    try {
+        const uid = auth.currentUser.uid;
+        const ts = Date.now();
+
+        const frontRef = storage.ref().child(`nid/${uid}/front_${ts}_${currentApplication.frontFile.name}`);
+        await frontRef.put(currentApplication.frontFile);
+        const frontUrl = await frontRef.getDownloadURL();
+
+        const backRef = storage.ref().child(`nid/${uid}/back_${ts}_${currentApplication.backFile.name}`);
+        await backRef.put(currentApplication.backFile);
+        const backUrl = await backRef.getDownloadURL();
+
+        const interest = currentApplication.amount * 0.03;
+        const totalPayable = currentApplication.amount + interest;
+        const docRef = await db.collection('loanApplications').add({
+            uid, name: currentApplication.name,
+            phone: currentUserProfile ? currentUserProfile.phone : '',
+            amount: currentApplication.amount,
+            duration: currentApplication.duration,
+            reason: currentApplication.reason,
+            feeAmount: currentApplication.feeAmount,
+            interest, totalPayable,
+            nidFront: frontUrl, nidBack: backUrl,
+            status: 'pending',
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        currentApplication.loanDocId = docRef.id;
+
+        document.getElementById('depositText').innerText = `আপনি ${currentApplication.amount} টাকা লোন নিতে চাইলে আপনাকে ${currentApplication.feeAmount} টাকা জামানত জমা দিতে হবে।`;
         document.getElementById('depositModal').classList.add('active');
+    } catch (err) {
+        console.error(err);
+        alert('আপলোড ব্যর্থ: ' + err.message);
+    } finally {
+        btn.innerText = 'ডকুমেন্ট জমা দিন'; btn.disabled = false;
     }
 }
 
@@ -720,93 +884,370 @@ function goToPaymentSelector() {
 
 function selectPaymentMethod(method) {
     currentApplication.selectedMethod = method;
-    document.querySelectorAll('.method-card').forEach(card => card.classList.remove('selected'));
-    
-    if (method === 'bKash') document.getElementById('method-bkash').classList.add('selected');
-    if (method === 'Nagad') document.getElementById('method-nagad').classList.add('selected');
-    if (method === 'Rocket') document.getElementById('method-rocket').classList.add('selected');
+    document.querySelectorAll('.method-card').forEach(c => c.classList.remove('selected'));
+    const el = document.getElementById('method-' + method.toLowerCase());
+    if (el) el.classList.add('selected');
 }
 
 function proceedToGateway() {
-    const method = currentApplication.selectedMethod;
-    const marchantNumber = merchantNumbers[method];
-    
-    document.getElementById('gatewayName').innerText = method === 'bKash' ? 'bKash' : method === 'Nagad' ? 'নগদ' : 'রকেট';
-    document.getElementById('instructionMethodName').innerText = method;
-    document.getElementById('instructionMethodName2').innerText = method;
+    const m = currentApplication.selectedMethod;
+    document.getElementById('gatewayName').innerText = m === 'bKash' ? 'bKash' : m === 'Nagad' ? 'নগদ' : 'রকেট';
+    document.getElementById('instructionMethodName').innerText = m;
+    document.getElementById('instructionMethodName2').innerText = m;
     document.getElementById('gatewayAmountText').innerText = `${currentApplication.feeAmount} BDT`;
     document.getElementById('gatewayAmountInstruction').innerText = currentApplication.feeAmount;
-    document.getElementById('gatewayNumber').innerText = marchantNumber;
-    
-    document.getElementById('gatewayLogoImg').src = gatewayLogos[method];
+    document.getElementById('gatewayNumber').innerText = merchantNumbers[m];
+    document.getElementById('gatewayLogoImg').src = gatewayLogos[m];
     showPage('paymentGatewayPage');
 }
 
 function copyGatewayNumber() {
     const num = merchantNumbers[currentApplication.selectedMethod];
     navigator.clipboard.writeText(num);
-    alert('নম্বর কপি করা হয়েছে: ' + num);
+    alert('নম্বর কপি: ' + num);
 }
-
 function copyGatewayAmount() {
     const amt = currentApplication.feeAmount.toString();
     navigator.clipboard.writeText(amt);
-    alert('পরিমাণ কপি করা হয়েছে: ' + amt);
+    alert('পরিমাণ কপি: ' + amt);
 }
 
-function handlePaymentVerify(e) {
+// ============ PAYMENT VERIFY ============
+async function handlePaymentVerify(e) {
     e.preventDefault();
     const trxId = document.getElementById('trxIdInput').value.trim();
-    if (trxId.length < 4) {
-        alert('সঠিক ট্রানজেকশন আইডি প্রদান করুন!');
-        return;
-    }
-    alert('আপনার জামানত ও পেমেন্ট যাচাই করা হচ্ছে। শীঘ্রই অ্যাপপ্রুভ করা হবে। ধন্যবাদ!');
+    if (trxId.length < 4) { alert('সঠিক Transaction ID দিন!'); return; }
+    if (!auth.currentUser) return;
+
+    try {
+        await db.collection('payments').add({
+            uid: auth.currentUser.uid,
+            name: currentApplication.name,
+            phone: currentUserProfile ? currentUserProfile.phone : '',
+            method: currentApplication.selectedMethod,
+            amount: currentApplication.feeAmount,
+            trxId: trxId,
+            merchantNumber: merchantNumbers[currentApplication.selectedMethod],
+            loanDocId: currentApplication.loanDocId || null,
+            status: 'pending',
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+    } catch (err) { console.error(err); }
+
+    alert('জামানত যাচাই করা হচ্ছে। শীঘ্রই অ্যাপ্রুভ করা হবে।');
+    document.getElementById('trxIdInput').value = '';
     showPage('homePage');
 }
 
-function logout() {
-    localStorage.removeItem('currentUser');
-    alert('লগআউট সফল হয়েছে!');
-    showPage('homePage');
+// ============ MY LOANS ============
+async function loadMyLoans() {
+    const el = document.getElementById('myLoansContent');
+    if (!auth.currentUser) { el.innerHTML = 'লগইন করুন।'; return; }
+    el.innerHTML = 'লোড হচ্ছে...';
+    try {
+        const snap = await db.collection('loanApplications').where('uid', '==', auth.currentUser.uid).get();
+        if (snap.empty) { el.innerHTML = '<p style="text-align:center; color:#777;">কোনো লোন নেই।</p>'; return; }
+        let html = '';
+        snap.forEach(doc => {
+            const d = doc.data();
+            const badge = d.status === 'approved' ? 'badge-approved' : d.status === 'rejected' ? 'badge-rejected' : 'badge-pending';
+            html += `
+                <div class="admin-card">
+                    <div class="title">৳ ${d.amount}</div>
+                    <div class="info-row"><span>মেয়াদ:</span><b>${d.duration} মাস</b></div>
+                    <div class="info-row"><span>কারণ:</span><b>${d.reason}</b></div>
+                    <div class="info-row"><span>মোট পরিশোধ:</span><b>৳ ${d.totalPayable}</b></div>
+                    <div class="info-row"><span>স্ট্যাটাস:</span><span class="badge ${badge}">${d.status}</span></div>
+                </div>`;
+        });
+        el.innerHTML = html;
+    } catch (err) { el.innerHTML = '<p style="color:red;">' + err.message + '</p>'; }
 }
 
-document.getElementById('registerForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('regName').value.trim();
-    const phone = document.getElementById('regPhone').value.trim();
-    const password = document.getElementById('regPassword').value;
-    
-    const userData = { name, phone, password };
-    localStorage.setItem('user_' + phone, JSON.stringify(userData));
-    localStorage.setItem('currentUser', JSON.stringify(userData));
-    alert('নিবন্ধন সফল হয়েছে!');
-    this.reset();
-    showPage('homePage');
-});
+// ============ ADMIN ============
+function adminTab(tab) {
+    adminCurrentTab = tab;
+    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    if (tab === 'users') loadAllUsers();
+    else if (tab === 'loans') loadAllLoans();
+    else if (tab === 'payments') loadAllPayments();
+}
 
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const phone = document.getElementById('loginPhone').value.trim();
-    const password = document.getElementById('loginPassword').value;
-    
-    const storedUser = localStorage.getItem('user_' + phone);
-    if (!storedUser) {
-        alert('এই নম্বরে কোনো অ্যাকাউন্ট পাওয়া যায়নি!');
-        return;
-    }
-    const userData = JSON.parse(storedUser);
-    if (userData.password === password) {
-        localStorage.setItem('currentUser', JSON.stringify(userData));
-        this.reset();
-        showPage('homePage');
-    } else {
-        alert('পাসওয়ার্ড ভুল হয়েছে!');
-    }
-});
+async function loadAllUsers() {
+    const el = document.getElementById('adminContent');
+    el.innerHTML = '<p style="text-align:center; color:#777;">লোড হচ্ছে...</p>';
 
+    try {
+        const [usersSnap, loansSnap, paymentsSnap] = await Promise.all([
+            db.collection('users').orderBy('createdAt', 'desc').get(),
+            db.collection('loanApplications').get(),
+            db.collection('payments').get()
+        ]);
+
+        const loansByUid = {};
+        loansSnap.forEach(doc => {
+            const d = doc.data();
+            if (!loansByUid[d.uid]) loansByUid[d.uid] = [];
+            loansByUid[d.uid].push({ id: doc.id, ...d });
+        });
+
+        const paymentsByUid = {};
+        paymentsSnap.forEach(doc => {
+            const p = doc.data();
+            if (!paymentsByUid[p.uid]) paymentsByUid[p.uid] = [];
+            paymentsByUid[p.uid].push({ id: doc.id, ...p });
+        });
+
+        if (usersSnap.empty) {
+            el.innerHTML = '<p style="text-align:center; color:#777;">কোনো ইউজার নেই।</p>';
+            return;
+        }
+
+        let html = '';
+
+        usersSnap.forEach(doc => {
+            const u = doc.data();
+            const uid = u.uid;
+            const userLoans = loansByUid[uid] || [];
+            const userPayments = paymentsByUid[uid] || [];
+
+            const totalPaid = userPayments
+                .filter(p => p.status === 'approved')
+                .reduce((sum, p) => sum + (p.amount || 0), 0);
+            const totalPendingPayment = userPayments
+                .filter(p => p.status !== 'approved' && p.status !== 'rejected')
+                .reduce((sum, p) => sum + (p.amount || 0), 0);
+
+            let nidFront = null, nidBack = null;
+            for (let i = userLoans.length - 1; i >= 0; i--) {
+                if (userLoans[i].nidFront) { nidFront = userLoans[i].nidFront; nidBack = userLoans[i].nidBack; break; }
+            }
+
+            let paymentsHtml = '';
+            if (userPayments.length === 0) {
+                paymentsHtml = '<div style="font-size:10px; color:#999; padding:4px;">কোনো পেমেন্ট নেই</div>';
+            } else {
+                userPayments.forEach(p => {
+                    const bg = p.status === 'approved' ? '#d4edda' : p.status === 'rejected' ? '#f8d7da' : '#fff3cd';
+                    const tc = p.status === 'approved' ? '#155724' : p.status === 'rejected' ? '#721c24' : '#856404';
+                    paymentsHtml += `
+                        <div class="payment-item">
+                            <div style="display:flex; justify-content:space-between;">
+                                <span><b>৳ ${p.amount}</b> — ${p.method}</span>
+                                <span style="background:${bg}; color:${tc}; padding:1px 6px; border-radius:8px; font-size:9px; font-weight:bold;">${p.status}</span>
+                            </div>
+                            <div style="margin-top:2px;">TrxID: <b>${p.trxId}</b></div>
+                            <div style="color:#888; font-size:9px;">নম্বর: ${p.merchantNumber || '-'}</div>
+                        </div>`;
+                });
+            }
+
+            let loansHtml = '';
+            if (userLoans.length === 0) {
+                loansHtml = '<div style="font-size:10px; color:#999; padding:4px;">কোনো লোন নেই</div>';
+            } else {
+                userLoans.forEach(l => {
+                    const bg = l.status === 'approved' ? '#d4edda' : l.status === 'rejected' ? '#f8d7da' : '#fff3cd';
+                    const tc = l.status === 'approved' ? '#155724' : l.status === 'rejected' ? '#721c24' : '#856404';
+                    loansHtml += `
+                        <div class="payment-item" style="background:#e3f2fd; border-color:#1976d2;">
+                            <div style="display:flex; justify-content:space-between;">
+                                <span><b>৳ ${l.amount}</b> — ${l.reason}</span>
+                                <span style="background:${bg}; color:${tc}; padding:1px 6px; border-radius:8px; font-size:9px; font-weight:bold;">${l.status}</span>
+                            </div>
+                            <div style="margin-top:2px;">মেয়াদ: ${l.duration} মাস | মোট পরিশোধ: ৳ ${l.totalPayable}</div>
+                        </div>`;
+                });
+            }
+
+            html += `
+                <div class="admin-card">
+                    <div class="title">
+                        <i class="fa-solid fa-user"></i> ${u.name || '-'}
+                        ${u.role === 'admin' ? '<span class="badge badge-approved" style="margin-left:5px;">ADMIN</span>' : ''}
+                    </div>
+
+                    <div class="info-row"><span>📱 ফোন:</span><b>${u.phone || '-'}</b></div>
+                    <div class="info-row"><span>📧 ইমেইল:</span><b style="font-size:10px;">${u.email || '-'}</b></div>
+                    <div class="info-row"><span>💰 বর্তমান ব্যালেন্স:</span><b style="color:#2e7d32;">৳ ${u.balance || 0}</b></div>
+
+                    <div class="section-label">🪪 NID কার্ড:</div>
+                    ${nidFront ? `
+                        <div class="nid-mini-grid">
+                            <div class="nid-mini" onclick="window.open('${nidFront}','_blank')">
+                                <img src="${nidFront}">
+                                <span>Front (দেখুন)</span>
+                            </div>
+                            <div class="nid-mini" onclick="window.open('${nidBack}','_blank')">
+                                <img src="${nidBack}">
+                                <span>Back (দেখুন)</span>
+                            </div>
+                        </div>
+                    ` : '<div style="font-size:10px; color:#999; padding:4px;">NID আপলোড করা হয়নি</div>'}
+
+                    <div class="stat-box">
+                        <div class="stat-row">
+                            <span>মোট পরিশোধ (Approved):</span>
+                            <span class="green">৳ ${totalPaid}</span>
+                        </div>
+                        ${totalPendingPayment > 0 ? `
+                        <div class="stat-row">
+                            <span>Pending পেমেন্ট:</span>
+                            <span style="color:#f57c00; font-weight:bold;">৳ ${totalPendingPayment}</span>
+                        </div>` : ''}
+                        <div class="stat-row">
+                            <span>মোট পেমেন্ট সংখ্যা:</span>
+                            <span class="blue">${userPayments.length} টি</span>
+                        </div>
+                    </div>
+
+                    <div class="section-label">💳 পেমেন্ট ও TrxID:</div>
+                    ${paymentsHtml}
+
+                    <div class="section-label">📄 লোন আবেদন:</div>
+                    ${loansHtml}
+
+                    <div style="display:flex; gap:5px; align-items:center; margin-top:10px; border-top:1px dashed #ddd; padding-top:8px;">
+                        <input type="number" id="bal_${uid}" placeholder="টাকা লিখুন" style="flex:1; padding:6px; border:1px solid #ddd; border-radius:5px; font-size:11px;">
+                        <button class="admin-btn btn-blue" onclick="addBalance('${uid}')">➕ ব্যালেন্স যোগ</button>
+                    </div>
+                </div>`;
+        });
+
+        el.innerHTML = html;
+    } catch (err) {
+        console.error(err);
+        el.innerHTML = '<p style="color:red; padding:10px;">লোড ব্যর্থ: ' + err.message + '</p>';
+    }
+}
+
+async function loadAllLoans() {
+    const el = document.getElementById('adminContent');
+    el.innerHTML = 'লোড হচ্ছে...';
+    try {
+        const snap = await db.collection('loanApplications').orderBy('createdAt', 'desc').get();
+        if (snap.empty) { el.innerHTML = '<p style="text-align:center;">কোনো লোন নেই।</p>'; return; }
+        let html = '';
+        snap.forEach(doc => {
+            const d = doc.data();
+            const badge = d.status === 'approved' ? 'badge-approved' : d.status === 'rejected' ? 'badge-rejected' : 'badge-pending';
+            html += `
+                <div class="admin-card">
+                    <div class="title">${d.name} — ৳ ${d.amount}</div>
+                    <div class="info-row"><span>📱 ফোন:</span><b>${d.phone || '-'}</b></div>
+                    <div class="info-row"><span>মেয়াদ:</span><b>${d.duration} মাস</b></div>
+                    <div class="info-row"><span>কারণ:</span><b>${d.reason}</b></div>
+                    <div class="info-row"><span>জামানত:</span><b>৳ ${d.feeAmount}</b></div>
+                    <div class="info-row"><span>মোট পরিশোধ:</span><b>৳ ${d.totalPayable}</b></div>
+                    <div class="info-row"><span>স্ট্যাটাস:</span><span class="badge ${badge}">${d.status}</span></div>
+                    ${d.nidFront ? `<div class="section-label">🪪 NID:</div>
+                    <div class="nid-mini-grid">
+                        <div class="nid-mini" onclick="window.open('${d.nidFront}','_blank')">
+                            <img src="${d.nidFront}"><span>Front</span>
+                        </div>
+                        <div class="nid-mini" onclick="window.open('${d.nidBack}','_blank')">
+                            <img src="${d.nidBack}"><span>Back</span>
+                        </div>
+                    </div>` : ''}
+                    <div style="margin-top:8px;">
+                        ${d.status !== 'approved' ? `<button class="admin-btn btn-green" onclick="approveLoan('${doc.id}','${d.uid}',${d.amount})">✓ Approve + ব্যালেন্স</button>` : ''}
+                        ${d.status !== 'rejected' ? `<button class="admin-btn btn-red" onclick="rejectLoan('${doc.id}')">✗ Reject</button>` : ''}
+                    </div>
+                </div>`;
+        });
+        el.innerHTML = html;
+    } catch (err) { el.innerHTML = '<p style="color:red;">' + err.message + '</p>'; }
+}
+
+async function loadAllPayments() {
+    const el = document.getElementById('adminContent');
+    el.innerHTML = 'লোড হচ্ছে...';
+    try {
+        const snap = await db.collection('payments').orderBy('createdAt', 'desc').get();
+        if (snap.empty) { el.innerHTML = '<p style="text-align:center;">কোনো পেমেন্ট নেই।</p>'; return; }
+        let html = '';
+        snap.forEach(doc => {
+            const p = doc.data();
+            const badge = p.status === 'approved' ? 'badge-approved' : p.status === 'rejected' ? 'badge-rejected' : 'badge-pending';
+            html += `
+                <div class="admin-card">
+                    <div class="title">${p.name} — ৳ ${p.amount}</div>
+                    <div class="info-row"><span>📱 ফোন:</span><b>${p.phone || '-'}</b></div>
+                    <div class="info-row"><span>মেথড:</span><b>${p.method}</b></div>
+                    <div class="info-row"><span>TrxID:</span><b>${p.trxId}</b></div>
+                    <div class="info-row"><span>স্ট্যাটাস:</span><span class="badge ${badge}">${p.status}</span></div>
+                    <div style="margin-top:8px;">
+                        ${p.status !== 'approved' ? `<button class="admin-btn btn-green" onclick="approvePayment('${doc.id}')">✓ Approve</button>` : ''}
+                        ${p.status !== 'rejected' ? `<button class="admin-btn btn-red" onclick="rejectPayment('${doc.id}')">✗ Reject</button>` : ''}
+                    </div>
+                </div>`;
+        });
+        el.innerHTML = html;
+    } catch (err) { el.innerHTML = '<p style="color:red;">' + err.message + '</p>'; }
+}
+
+async function addBalance(uid) {
+    const input = document.getElementById('bal_' + uid);
+    const amount = parseFloat(input.value);
+    if (!amount || amount <= 0) { alert('সঠিক পরিমাণ লিখুন!'); return; }
+    try {
+        const userRef = db.collection('users').doc(uid);
+        const snap = await userRef.get();
+        const cur = snap.data().balance || 0;
+        await userRef.update({ balance: cur + amount });
+        alert(`৳ ${amount} যোগ করা হয়েছে! নতুন ব্যালেন্স: ৳ ${cur + amount}`);
+        input.value = '';
+        loadAllUsers();
+    } catch (err) { alert('ত্রুটি: ' + err.message); }
+}
+
+async function approveLoan(docId, uid, loanAmount) {
+    if (!confirm(`এই লোন Approve করবেন? ইউজারের ব্যালেন্সে ৳ ${loanAmount} যোগ হবে।`)) return;
+    try {
+        await db.collection('loanApplications').doc(docId).update({
+            status: 'approved',
+            approvedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        const userRef = db.collection('users').doc(uid);
+        const snap = await userRef.get();
+        const cur = snap.data().balance || 0;
+        await userRef.update({ balance: cur + loanAmount });
+        alert('লোন Approve হয়েছে এবং ব্যালেন্স যোগ হয়েছে!');
+        loadAllLoans();
+    } catch (err) { alert('ত্রুটি: ' + err.message); }
+}
+
+async function rejectLoan(docId) {
+    if (!confirm('এই লোন Reject করবেন?')) return;
+    try {
+        await db.collection('loanApplications').doc(docId).update({ status: 'rejected' });
+        alert('Reject করা হয়েছে।');
+        loadAllLoans();
+    } catch (err) { alert('ত্রুটি: ' + err.message); }
+}
+
+async function approvePayment(docId) {
+    try {
+        await db.collection('payments').doc(docId).update({
+            status: 'approved',
+            approvedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        alert('পেমেন্ট Approve হয়েছে।');
+        loadAllPayments();
+    } catch (err) { alert('ত্রুটি: ' + err.message); }
+}
+
+async function rejectPayment(docId) {
+    try {
+        await db.collection('payments').doc(docId).update({ status: 'rejected' });
+        alert('Reject করা হয়েছে।');
+        loadAllPayments();
+    } catch (err) { alert('ত্রুটি: ' + err.message); }
+}
+
+// ============ INIT ============
 renderHeader();
 </script>
 </body>
 </html>
-
